@@ -7,87 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
     <link rel="stylesheet" href="material/css/st.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #181818;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-        .frens-invite {
-            text-align: center;
-            padding: 20px;
-        }
-        .telegram-invite {
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #2a9df4;
-            border-radius: 5px;
-            color: #fff;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 18px;
-        }
-        .telegram-invite:hover {
-            background-color: #1c7ccc;
-        }
-        .copy-box {
-            margin-top: 15px;
-            text-align: center;
-        }
-        .copy-box input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .copy-box button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .copy-box button:hover {
-            background-color: #218838;
-        }
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            padding: 10px 0;
-        }
-        .nav-item {
-            text-align: center;
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .nav-item i {
-            font-size: 20px;
-            margin-bottom: 5px;
-            display: block;
-        }
-        .nav-item:hover {
-            color: #007bff;
-        }
-    </style>
 </head>
 <body>
+    
+
     <div class="frens-invite">
-        <a href="https://t.me/SelfMolded108_bot" class="telegram-invite" target="_blank">
-            Open Telegram to Invite Friends
-        </a>
-        <div class="copy-box">
-            <input type="text" value="https://t.me/SelfMolded108_bot" id="inviteLink" readonly>
+        <div class="frens-invite-button">
+            <input type="text" value="https://t.me/SelfMolded108_bot" id="link" readonly>
             <button id="copyButton">Copy Link</button>
         </div>
     </div>
@@ -114,18 +40,7 @@
             <span>BALANCE</span>
         </a>
     </nav>
-
-    <script>
-        const copyButton = document.getElementById('copyButton');
-        const inviteLink = document.getElementById('inviteLink');
-
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(inviteLink.value).then(() => {
-                alert('Link copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy link: ', err);
-            });
-        });
-    </script>
+    <script src="material/js/cojs.js"></script>
+    <script src="material/js/scripts.js"></script>
 </body>
 </html>
