@@ -36,6 +36,12 @@
             margin-left: 8px;
         }
 
+        .info-text {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+
         .frens-invite-button {
             margin: 20px auto;
             display: flex;
@@ -85,7 +91,36 @@
             background-color: #1e7e34;
         }
 
-        /* Bottom navigation bar */
+        .invited-list {
+            margin: 20px auto;
+            width: 90%;
+            text-align: left;
+            background-color: #222;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .invited-list h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .invited-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .invited-list li {
+            font-size: 14px;
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #333;
+            border-radius: 5px;
+            color: #fff;
+        }
+
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -125,6 +160,7 @@
 </head>
 <body>
     <h1>Invite Your Friends</h1>
+    <p class="info-text">You will earn 500 points for every friend who joins using your link. Invite 10 friends and earn 10,000 points!</p>
     <div class="frens-invite">
         <div class="highlight">
             Earn 500 Points for Every Invite!
@@ -132,9 +168,16 @@
         </div>
         <div class="frens-invite-button">
             <input type="text" id="link" readonly>
-            <button id="copyButton">Copy Link </button>
+            <button id="copyButton">Copy Link</button>
         </div>
         <a id="telegramInviteButton" class="invite-button">Invite on Telegram</a>
+    </div>
+
+    <div class="invited-list">
+        <h2>Your Invited Friends:</h2>
+        <ul id="invitedFriendsList">
+            <li>Loading...</li>
+        </ul>
     </div>
 
     <nav class="bottom-nav">
@@ -161,33 +204,51 @@
     </nav>
 
     <script>
-        // Mock backend response (replace this with your server's API call)
+        // Mock backend response (replace with your server's API call)
         const getReferralLink = () => {
             const userID = "userID123"; // Replace with actual user ID
             return `https://t.me/SelfMolded108_bot?ref=${userID}`;
         };
 
-        // Set the referral link and description
+        const getInvitedFriends = () => {
+            // Mock data; replace with an actual server call
+            return [
+                { name: "Friend 1", joined: true },
+                { name: "Friend 2", joined: false },
+                { name: "Friend 3", joined: true },
+            ];
+        };
+
+        // Set the referral link
         const referralLink = getReferralLink();
-        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
         document.getElementById("link").value = referralLink;
 
-        // Copy link and description to clipboard
+        // Copy link functionality
         document.getElementById("copyButton").addEventListener("click", function () {
-            const fullTextToCopy = referralDescription;
-            navigator.clipboard.writeText(fullTextToCopy)
+            navigator.clipboard.writeText(referralLink)
                 .then(() => {
-                    alert("Referral link and description copied to clipboard!");
+                    alert("Referral link copied!");
                 })
                 .catch((err) => {
                     console.error("Failed to copy: ", err);
                 });
         });
 
-        // Add functionality to the Telegram Invite button
+        // Display invited friends
+        const invitedFriendsList = document.getElementById("invitedFriendsList");
+        const invitedFriends = getInvitedFriends();
+
+        invitedFriendsList.innerHTML = ""; // Clear the list
+        invitedFriends.forEach(friend => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${friend.name} - ${friend.joined ? "Joined" : "Pending"}`;
+            invitedFriendsList.appendChild(listItem);
+        });
+
+        // Telegram Invite Button
         const telegramInviteButton = document.getElementById("telegramInviteButton");
-        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
-        telegramInviteButton.target = "_blank"; // Opens in a new tab
+        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent("Join with my link!")}`;
+        telegramInviteButton.target = "_blank";
     </script>
 </body>
 </html>
