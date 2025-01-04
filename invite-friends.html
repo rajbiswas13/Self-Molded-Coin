@@ -7,10 +7,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
     <link rel="stylesheet" href="material/css/st.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .frens-invite {
+            margin: 20px auto;
+        }
+
+        .frens-invite-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frens-invite-button input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .frens-invite-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .frens-invite-button button:hover {
+            background-color: #0056b3;
+        }
+
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #444;
+        }
+
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
-    
-
     <div class="frens-invite">
         <div class="frens-invite-button">
             <input type="text" value="https://t.me/SelfMolded108_bot" id="link" readonly>
@@ -40,7 +111,25 @@
             <span>BALANCE</span>
         </a>
     </nav>
-    <script src="material/js/cojs.js"></script>
-    <script src="material/js/scripts.js"></script>
+
+    <script>
+        // JavaScript to handle the "Copy Link" functionality
+        document.getElementById("copyButton").addEventListener("click", function() {
+            const linkInput = document.getElementById("link");
+            
+            // Select the input field text
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(linkInput.value)
+                .then(() => {
+                    alert("Link copied to clipboard: " + linkInput.value);
+                })
+                .catch((err) => {
+                    console.error("Failed to copy link: ", err);
+                });
+        });
+    </script>
 </body>
-</html>
+            </html>
