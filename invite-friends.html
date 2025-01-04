@@ -20,6 +20,22 @@
             width: 90%;
         }
 
+        .highlight {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700; /* গোল্ডেন রঙ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .highlight img {
+            width: 24px;
+            height: 24px;
+            margin-left: 8px;
+        }
+
         .frens-invite-button {
             margin: 20px auto;
             display: flex;
@@ -68,17 +84,81 @@
         .invite-button:hover {
             background-color: #1e7e34;
         }
+
+        /* Bottom navigation bar */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            height: 60px;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+        }
+
+        .nav-item:hover {
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
     <h1>Invite Your Friends</h1>
     <div class="frens-invite">
+        <div class="highlight">
+            Earn 500 Points for Every Invite!
+            <img src="https://via.placeholder.com/24" alt="Token Logo">
+        </div>
         <div class="frens-invite-button">
             <input type="text" id="link" readonly>
             <button id="copyButton">Copy Link </button>
         </div>
         <a id="telegramInviteButton" class="invite-button">Invite on Telegram</a>
     </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
 
     <script>
         // Mock backend response (replace this with your server's API call)
@@ -89,7 +169,7 @@
 
         // Set the referral link and description
         const referralLink = getReferralLink();
-        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Here's my referral link: ${referralLink}`;
+        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
         document.getElementById("link").value = referralLink;
 
         // Copy link and description to clipboard
