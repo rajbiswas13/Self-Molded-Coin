@@ -93,4 +93,21 @@
         document.getElementById("link").value = referralLink;
 
         // Copy link and description to clipboard
-        document.getElementById("
+        document.getElementById("copyButton").addEventListener("click", function () {
+            const fullTextToCopy = referralDescription;
+            navigator.clipboard.writeText(fullTextToCopy)
+                .then(() => {
+                    alert("Referral link and description copied to clipboard!");
+                })
+                .catch((err) => {
+                    console.error("Failed to copy: ", err);
+                });
+        });
+
+        // Add functionality to the Telegram Invite button
+        const telegramInviteButton = document.getElementById("telegramInviteButton");
+        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
+        telegramInviteButton.target = "_blank"; // Opens in a new tab
+    </script>
+</body>
+</html>
