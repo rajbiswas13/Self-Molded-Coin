@@ -164,41 +164,41 @@
     </nav>
 
     <script>
-        // Mock backend response (replace this with your server's API call)
-        const getReferralLink = () => {
-            const userID = "userID123"; // Replace with actual user ID
-            return `https://t.me/SelfMolded108_bot?ref=${userID}`;
-        };
+    // Mock backend response (replace this with your server's API call)
+    const getReferralLink = () => {
+        const userID = "userID123"; // Replace with actual user ID
+        return `https://t.me/SelfMolded108_bot?ref=${userID}`;
+    };
 
-        // Set the referral link and description
-        const referralLink = getReferralLink();
-        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
-        document.getElementById("link").value = referralLink;
+    // Set the referral link and description
+    const referralLink = getReferralLink();
+    const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
+    document.getElementById("link").value = referralLink;
 
-        // Copy link and description to clipboard
-        document.getElementById("copyButton").addEventListener("click", function () {
-            const linkInput = document.getElementById("link");
-            const copyButton = document.getElementById("copyButton");
+    // Copy link and description to clipboard
+    document.getElementById("copyButton").addEventListener("click", function () {
+        const copyButton = document.getElementById("copyButton");
 
-            navigator.clipboard.writeText(referralDescription)
-                .then(() => {
-                    // Provide subtle feedback
-                    copyButton.textContent = "Copied!";
-                    copyButton.style.backgroundColor = "#28a745"; // Change button to green
-                    setTimeout(() => {
-                        copyButton.textContent = "Copy Link";
-                        copyButton.style.backgroundColor = "#007bff"; // Reset color
-                    }, 2000);
-                })
-                .catch((err) => {
-                    console.error("Failed to copy: ", err);
-                });
-        });
+        // Use Clipboard API to copy text
+        navigator.clipboard.writeText(referralDescription)
+            .then(() => {
+                // Provide subtle feedback (change button text without alert)
+                copyButton.textContent = "Copied!";
+                copyButton.style.backgroundColor = "#28a745"; // Change button to green
+                setTimeout(() => {
+                    copyButton.textContent = "Copy Link";
+                    copyButton.style.backgroundColor = "#007bff"; // Reset color
+                }, 2000);
+            })
+            .catch((err) => {
+                console.error("Failed to copy: ", err);
+            });
+    });
 
-        // Add functionality to the Telegram Invite button
-        const telegramInviteButton = document.getElementById("telegramInviteButton");
-        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
-        telegramInviteButton.target = "_blank"; // Opens in a new tab
+    // Add functionality to the Telegram Invite button
+    const telegramInviteButton = document.getElementById("telegramInviteButton");
+    telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
+    telegramInviteButton.target = "_blank"; // Opens in a new tab
     </script>
 </body>
 </html>
