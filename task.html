@@ -6,7 +6,6 @@
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Style Section */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -90,6 +89,7 @@
         .task-button:hover {
             background-color: #a2aaa0;
         }
+
         .tasks.scrollable {
             max-height: 590px; 
             overflow-y: auto; 
@@ -124,8 +124,8 @@
     <h2><b>_______________</b></h2>
 
     <section class="tasks scrollable">
+        <!-- Task 1 -->
         <div class="task-container">
-            <!-- Task 1 -->
             <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
@@ -141,7 +141,10 @@
                 </div>
                 <button class="task-button" onclick="completeTask(100, 'https://youtube.com/@tho7142?sub_confirmation=1')"> ☯ claim</button>
             </div>
-            <!-- Task 2 -->
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task-container">
             <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
@@ -156,6 +159,63 @@
                     </div>
                 </div>
                 <button class="task-button" onclick="completeTask(100, 'https://t.me/selfmolded')"> ☯ claim</button>
+            </div>
+        </div>
+
+        <!-- Task 3 -->
+        <div class="task-container">
+            <div class="task">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/fa.png" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Follow</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>100</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="completeTask(100, 'https://www.facebook.com/share/19nELsSGbX/')"> ☯ claim</button>
+            </div>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task-container">
+            <div class="task">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/ista.png" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Follow</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>100</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="completeTask(100, 'https://www.instagram.com/tho_home')"> ☯ claim</button>
+            </div>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task-container">
+            <div class="task">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/you.gif" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Watch Video</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>100</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="completeTask(100, 'https://youtu.be/y_FibS_GRv8')"> ☯ claim</button>
             </div>
         </div>
     </section>
@@ -184,14 +244,10 @@
     </nav>
 
     <script>
-        // JavaScript Logic
         let balance = 0;
 
         function completeTask(coins, url) {
-            // Redirect to URL
             window.open(url, '_blank');
-
-            // Update balance
             balance += coins;
             document.getElementById('balance').textContent = balance;
             alert(`You have earned ${coins} coins!`);
