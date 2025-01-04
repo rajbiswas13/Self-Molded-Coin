@@ -24,7 +24,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #FFD700; /* গোল্ডেন রঙ */
+            color: #FFD700; /* Golden color */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,12 +34,6 @@
             width: 24px;
             height: 24px;
             margin-left: 8px;
-        }
-
-        .info-text {
-            margin: 10px 0;
-            font-size: 14px;
-            color: #ccc;
         }
 
         .frens-invite-button {
@@ -91,36 +85,7 @@
             background-color: #1e7e34;
         }
 
-        .invited-list {
-            margin: 20px auto;
-            width: 90%;
-            text-align: left;
-            background-color: #222;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .invited-list h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #FFD700;
-        }
-
-        .invited-list ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .invited-list li {
-            font-size: 14px;
-            margin: 5px 0;
-            padding: 5px;
-            background-color: #333;
-            border-radius: 5px;
-            color: #fff;
-        }
-
+        /* Bottom navigation bar */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -160,7 +125,6 @@
 </head>
 <body>
     <h1>Invite Your Friends</h1>
-    <p class="info-text">You will earn 500 points for every friend who joins using your link. Invite 10 friends and earn 10,000 points!</p>
     <div class="frens-invite">
         <div class="highlight">
             Earn 500 Points for Every Invite!
@@ -170,14 +134,10 @@
             <input type="text" id="link" readonly>
             <button id="copyButton">Copy Link</button>
         </div>
+        <p id="inviteInfo" style="margin-top: 10px; font-size: 14px; color: #FFD700;">
+            Invite friends and earn 500 points for each successful invite! If your friends join using your link, they will also earn 500 points.
+        </p>
         <a id="telegramInviteButton" class="invite-button">Invite on Telegram</a>
-    </div>
-
-    <div class="invited-list">
-        <h2>Your Invited Friends:</h2>
-        <ul id="invitedFriendsList">
-            <li>Loading...</li>
-        </ul>
     </div>
 
     <nav class="bottom-nav">
@@ -204,51 +164,41 @@
     </nav>
 
     <script>
-        // Mock backend response (replace with your server's API call)
+        // Mock backend response (replace this with your server's API call)
         const getReferralLink = () => {
             const userID = "userID123"; // Replace with actual user ID
             return `https://t.me/SelfMolded108_bot?ref=${userID}`;
         };
 
-        const getInvitedFriends = () => {
-            // Mock data; replace with an actual server call
-            return [
-                { name: "Friend 1", joined: true },
-                { name: "Friend 2", joined: false },
-                { name: "Friend 3", joined: true },
-            ];
-        };
-
-        // Set the referral link
+        // Set the referral link and description
         const referralLink = getReferralLink();
+        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
         document.getElementById("link").value = referralLink;
 
-        // Copy link functionality
+        // Copy link and description to clipboard
         document.getElementById("copyButton").addEventListener("click", function () {
-            navigator.clipboard.writeText(referralLink)
+            const linkInput = document.getElementById("link");
+            const copyButton = document.getElementById("copyButton");
+
+            navigator.clipboard.writeText(referralDescription)
                 .then(() => {
-                    alert("Referral link copied!");
+                    // Provide subtle feedback
+                    copyButton.textContent = "Copied!";
+                    copyButton.style.backgroundColor = "#28a745"; // Change button to green
+                    setTimeout(() => {
+                        copyButton.textContent = "Copy Link";
+                        copyButton.style.backgroundColor = "#007bff"; // Reset color
+                    }, 2000);
                 })
                 .catch((err) => {
                     console.error("Failed to copy: ", err);
                 });
         });
 
-        // Display invited friends
-        const invitedFriendsList = document.getElementById("invitedFriendsList");
-        const invitedFriends = getInvitedFriends();
-
-        invitedFriendsList.innerHTML = ""; // Clear the list
-        invitedFriends.forEach(friend => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${friend.name} - ${friend.joined ? "Joined" : "Pending"}`;
-            invitedFriendsList.appendChild(listItem);
-        });
-
-        // Telegram Invite Button
+        // Add functionality to the Telegram Invite button
         const telegramInviteButton = document.getElementById("telegramInviteButton");
-        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent("Join with my link!")}`;
-        telegramInviteButton.target = "_blank";
+        telegramInviteButton.href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
+        telegramInviteButton.target = "_blank"; // Opens in a new tab
     </script>
 </body>
 </html>
