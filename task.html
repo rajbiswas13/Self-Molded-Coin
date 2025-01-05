@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-   
-    
     <style>
         /* CSS Styling */
         body {
@@ -128,8 +125,8 @@
     </div>
     <h2><b>_______________</b></h2>
 
-    <section class="tasks scrollable">
-        <div class="task-container">
+    <section class="tasks scrollable" id="tasks">
+        <div class="task-container" id="task-1">
             <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
@@ -143,132 +140,53 @@
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1')"> ☯ claim</button>
+                <button class="task-button" onclick="handleTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task-1')">☯ Claim</button>
             </div>
         </div>
-          </div>
-    
-        <div class="task-container">
-            <div class="task">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/tele.png" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Subscribe</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="completeTask(100, 'https://t.me/selfmolded')"> ☯ claim</button>
-            </div>
-            <div class="task-container">
-                <div class="task">
-                    <div class="task-detail">
-                        <div class="task-image">
-                            <img src="material/images/fa.png" width="45px" alt="">
-                        </div>
-                        <div>
-                            <h4>follow</h4>
-                            <div class="task-data">
-                                <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                                <h5>100</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="task-button" onclick="completeTask(100, 'https://www.facebook.com/share/19nELsSGbX/')"> ☯ claim</button>
-                </div>
-                <div class="task-container">
-                    <div class="task">
-                        <div class="task-detail">
-                            <div class="task-image">
-                                <img src="material/images/ista.png" width="45px" alt="">
-                            </div>
-                            <div>
-                                <h4>follow</h4>
-                                <div class="task-data">
-                                    <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                                    <h5>100</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="task-button" onclick="completeTask(100, 'https://www.instagram.com/tho_home?igsh=a3NiMnlqZjRwaDNn')"> ☯ claim</button>
-                    </div>
-                    <div class="task-container">
-                        <div class="task">
-                            <div class="task-detail">
-                                <div class="task-image">
-                                    <img src="material/images/you.gif" width="45px" alt="">
-                                </div>
-                                <div>
-                                    <h4>watch video</h4>
-                                    <div class="task-data">
-                                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                                        <h5>100</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/y_FibS_GRv8?si=4nLNBoYeBu0_vEKZ')"> ☯ claim</button>
-                        </div>
-
-                        <div class="task-container">
-                            <div class="task">
-                                <div class="task-detail">
-                                    <div class="task-image">
-                                        <img src="material/images/tele.png" width="45px" alt="">
-                                    </div>
-                                    <div>
-                                        <h4>Subscribe</h4>
-                                        <div class="task-data">
-                                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                                            <h5>100</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="task-button" onclick="completeTask(100, 'https://selfmolded.com/coming-soon/')"> ☯ claim</button>
-                            </div>
     </section>
 
-     <nav class="bottom-nav">
-            <a href="home.html" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>HOME</span>
-            </a>
-            <a href="leaderboard.html" class="nav-item">
-                <i class="fas fa-trophy"></i>
-                <span>LEADERBOARD</span>
-            </a>
-            <a href="invite-friends.html" class="nav-item">
-                <i class="fas fa-user-friends"></i>
-                <span>FRIENDS</span>
-            </a>
-            <a href="task.html" class="nav-item">
-                <i class="fas fa-tasks"></i>
-                <span>TASKS</span>
-            </a>
-            <a href="balance.html" class="nav-item">
-                <i class="fas fa-wallet"></i>
-                <span>BALANCE</span>
-            </a>
-        </nav>
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
     <script>
         // JavaScript Functionality
         let balance = 0;
 
-        function completeTask(button, reward, url) {
-            // Open the task link in a new tab
-            window.open(url, "_blank");
+        function handleTask(button, reward, url, taskId) {
+            if (button.textContent.trim() === "☯ Claim") {
+                // Open the task link in a new tab
+                window.open(url, "_blank");
 
-            // Update balance
-            balance += reward;
-            document.getElementById("balance").textContent = balance;
+                // Update button text to "Verify"
+                button.textContent = "Verify";
+            } else if (button.textContent.trim() === "Verify") {
+                // Update balance
+                balance += reward;
+                document.getElementById("balance").textContent = balance;
 
-            // Update button appearance
-            button.textContent = "Claimed!";
-            button.style.backgroundColor = "#28a745";
-            button.disabled = true;
+                // Remove the task from the DOM
+                document.getElementById(taskId).remove();
+            }
         }
     </script>
 </body>
