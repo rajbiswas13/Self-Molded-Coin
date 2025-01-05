@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelf Molded Tasks</title>
+    <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* CSS Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -31,9 +32,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #000; 
+            border: 1px solid #000000; 
             border-radius: 12px;
-            background-color: #333; 
+            background-color: #333030; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             width: 80%;
@@ -76,8 +77,8 @@
         }
 
         .task-button {
-            background-color: #fff; 
-            color: #000;
+            background-color: #ffffff; 
+            color: rgb(0, 0, 0);
             border: none;
             padding: 10px 20px;
             font-size: 16px;
@@ -96,39 +97,32 @@
             margin: 20px auto;
             width: 90%;       
             padding-right: 10px;
-            border: 1px solid #000; 
+            border: 1px solid #000000; 
         }
 
-        .bottom-nav {
+        nav.bottom-nav {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
             background-color: #222;
             padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #444;
         }
 
-        .nav-item {
-            text-decoration: none;
+        nav.bottom-nav a {
             color: #fff;
+            text-decoration: none;
+            font-size: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 14px;
-            transition: color 0.3s ease;
         }
 
-        .nav-item:hover {
-            color: #ffcc00;
-        }
-
-        .nav-item i {
+        nav.bottom-nav a i {
             font-size: 20px;
-            margin-bottom: 5px;
         }
 
         @media (max-width: 600px) {
@@ -148,16 +142,16 @@
     </style>
 </head>
 <body>
-    <!-- Page Header -->
+    <!-- HTML Content -->
     <div id="balance-container">
         <h2><b>_____________</b></h2>
         <h2><b> TASKS </b></h2>
-        <span id="balance">1100</span> ☯ total Self Molded Coin
+        <span id="balance">0</span> ☯ total Self Molded Coin
     </div>
     <h2><b>_______________</b></h2>
 
-    <!-- Task Section -->
     <section class="tasks scrollable">
+        <!-- Task 1 -->
         <div class="task-container">
             <div class="task" id="task1">
                 <div class="task-detail">
@@ -165,19 +159,36 @@
                         <img src="material/images/you.gif" width="45px" alt="">
                     </div>
                     <div>
-                        <h4>claim rewards</h4>
+                        <h4>Subscribe</h4>
                         <div class="task-data">
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>300</h5>
+                            <h5>100</h5>
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 300, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')"> ☯ claim</button>
+                <button class="task-button" onclick="verifyTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
+            </div>
+        </div>
+        <!-- Task 2 -->
+        <div class="task-container">
+            <div class="task" id="task2">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/you.gif" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Watch Video</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>200</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
             </div>
         </div>
     </section>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -202,7 +213,7 @@
     </nav>
 
     <script>
-        let balance = 1100;
+        let balance = 0; // Initialize the balance
 
         function verifyTask(button, reward, url, taskId) {
             if (button.textContent.trim() === "☯ claim") {
@@ -214,8 +225,8 @@
                 window.open(url, "_blank");
 
                 // Update balance
-                balance += reward;
-                document.getElementById("balance").textContent = balance;
+                balance += reward; // Add points to the balance
+                document.getElementById("balance").textContent = balance; // Update the balance on the page
 
                 // Remove the task after claiming
                 const task = document.getElementById(taskId);
