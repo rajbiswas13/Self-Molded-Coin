@@ -36,13 +36,12 @@
             border-radius: 12px;
             background-color: #333030; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, opacity 0.5s ease;
+            transition: transform 0.3s ease;
             width: 80%;
         }
 
-        .task.fly-away {
-            transform: translateY(-50px);
-            opacity: 0;
+        .task:hover {
+            transform: translateY(-5px);
         }
 
         .task-detail {
@@ -101,6 +100,38 @@
             border: 1px solid #000000; 
         }
 
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #222;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #ffcc00;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
         @media (max-width: 600px) {
             .task-container {
                 max-width: 100%;
@@ -126,8 +157,8 @@
     </div>
     <h2><b>_______________</b></h2>
 
-    <section class="tasks scrollable" id="tasks">
-        <div class="task-container" id="task-1">
+    <section class="tasks scrollable">
+        <div class="task-container">
             <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
@@ -141,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="handleTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task-1')">☯ Claim</button>
+                <button class="task-button" onclick="startTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1')"> ☯ claim</button>
             </div>
         </div>
     </section>
@@ -173,30 +204,27 @@
         // JavaScript Functionality
         let balance = 0;
 
-        function handleTask(button, reward, url, taskId) {
-            if (button.textContent.trim() === "☯ Claim") {
-                // Open the task link in a new tab
-                window.open(url, "_blank");
+        function startTask(button, reward, url) {
+            button.textContent = "Verify";
+            button.onclick = function () {
+                completeTask(button, reward, url);
+            };
+        }
 
-                // Update button text to "Verify"
-                button.textContent = "Verify";
-            } else if (button.textContent.trim() === "Verify") {
-                // Update balance
-                balance += reward;
-                document.getElementById("balance").textContent = balance;
+        function completeTask(button, reward, url) {
+            // Open the task link in a new tab
+            window.open(url, "_blank");
 
-                // Fly away effect
-                const taskElement = document.getElementById(taskId);
-                taskElement.classList.add("fly-away");
+            // Update balance
+            balance += reward;
+            document.getElementById("balance").textContent = balance;
 
-                // Wait for animation to complete before removing the task
-                setTimeout(() => {
-                    taskElement.remove();
-
-                    // Go back to the previous page
-                    window.history.back();
-                }, 500);
-            }
+            // Remove the task from the list
+            const taskElement = button.closest(".task");
+            taskElement.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            taskElement.style.opacity = 0;
+            taskElement.style.transform = "translateY(-20px)";
+            setTimeout(() => taskElement.remove(), 500);
         }
     </script>
 </body>
