@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Tasks</title>
+    <title>External Task Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
     <style>
+        /* Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -91,6 +91,31 @@
             background-color: #a2aaa0;
         }
 
+        nav.bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #222;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #444;
+        }
+
+        nav.bottom-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav.bottom-nav a i {
+            font-size: 20px;
+        }
+
         @media (max-width: 600px) {
             .task-container {
                 max-width: 100%;
@@ -108,15 +133,14 @@
     </style>
 </head>
 <body>
-   
-    <br><br>
+    <!-- Page Header -->
+    <h1>Shelf Molded</h1>
 
-
-    <div id="balance-container"><h2><b></b></h2>
-        <span id="balance">0</span> ☯ total Self Molded Coin
+    <div id="balance-container">
+        <span id="balance">1100</span> ☯ total Self Molded Coin
     </div>
-    <br>
 
+    <!-- Tasks Section -->
     <div class="task-container">
         <div class="task">
             <div class="task-detail">
@@ -131,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(300, 'reword.html')"> ☯ claim</button>
+            <button class="task-button" onclick="completeTask(300, 'reword.html')">☯ claim</button>
         </div>
 
         <div class="task">
@@ -147,41 +171,52 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(200, 'verify.html')"> ☯ claim</button>
+            <button class="task-button" onclick="completeTask(200, 'verify.html')">☯ claim</button>
         </div>
+    </div>
 
+    <div class="coin-container">
+        <div class="task-image">
+            <img src="material/images/logo.png" width="80%">
+        </div>
+    </div>
 
+    <!-- Bottom Navigation Menu -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
 
-        <div class="coin-container">
-            <div class="task-image">
-                <img src="material/images/logo.png" width="80%">
+    <!-- JavaScript -->
+    <script>
+        // Task Complete Function
+        function completeTask(points, redirectUrl) {
+            // Update the balance
+            const balanceElement = document.getElementById("balance");
+            let currentBalance = parseInt(balanceElement.textContent);
+            balanceElement.textContent = currentBalance + points;
 
-               
-
-                <nav class="bottom-nav">
-            <a href="home.html" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>HOME</span>
-            </a>
-            <a href="leaderboard.html" class="nav-item">
-                <i class="fas fa-trophy"></i>
-                <span>LEADERBOARD</span>
-            </a>
-            <a href="invite-friends.html" class="nav-item">
-                <i class="fas fa-user-friends"></i>
-                <span>FRIENDS</span>
-            </a>
-            <a href="task.html" class="nav-item">
-                <i class="fas fa-tasks"></i>
-                <span>TASKS</span>
-            </a>
-            <a href="balance.html" class="nav-item">
-                <i class="fas fa-wallet"></i>
-                <span>BALANCE</span>
-            </a>
-        </nav>
-
-    <script src="material/js/js.js"></script>
-    <script src="material/js/main.js"></script>
+            // Redirect to external task or verification link
+            window.location.href = redirectUrl;
+        }
+    </script>
 </body>
 </html>
