@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Tasks</title>
+    <title>Shelf Molded Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CSS Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -32,9 +31,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #000000; 
+            border: 1px solid #000; 
             border-radius: 12px;
-            background-color: #333030; 
+            background-color: #333; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             width: 80%;
@@ -77,8 +76,8 @@
         }
 
         .task-button {
-            background-color: #ffffff; 
-            color: rgb(0, 0, 0);
+            background-color: #fff; 
+            color: #000;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
@@ -97,7 +96,7 @@
             margin: 20px auto;
             width: 90%;       
             padding-right: 10px;
-            border: 1px solid #000000; 
+            border: 1px solid #000; 
         }
 
         .bottom-nav {
@@ -149,34 +148,36 @@
     </style>
 </head>
 <body>
-    <!-- HTML Content -->
+    <!-- Page Header -->
     <div id="balance-container">
         <h2><b>_____________</b></h2>
         <h2><b> TASKS </b></h2>
-        <span id="balance">0</span> ☯ total Self Molded Coin
+        <span id="balance">1100</span> ☯ total Self Molded Coin
     </div>
     <h2><b>_______________</b></h2>
 
+    <!-- Task Section -->
     <section class="tasks scrollable">
         <div class="task-container">
-            <div class="task">
+            <div class="task" id="task1">
                 <div class="task-detail">
                     <div class="task-image">
                         <img src="material/images/you.gif" width="45px" alt="">
                     </div>
                     <div>
-                        <h4>Subscribe</h4>
+                        <h4>claim rewards</h4>
                         <div class="task-data">
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100</h5>
+                            <h5>300</h5>
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="startTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1')"> ☯ claim</button>
+                <button class="task-button" onclick="verifyTask(this, 300, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')"> ☯ claim</button>
             </div>
         </div>
     </section>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -201,30 +202,27 @@
     </nav>
 
     <script>
-        // JavaScript Functionality
-        let balance = 0;
+        let balance = 1100;
 
-        function startTask(button, reward, url) {
-            button.textContent = "Verify";
-            button.onclick = function () {
-                completeTask(button, reward, url);
-            };
-        }
+        function verifyTask(button, reward, url, taskId) {
+            if (button.textContent.trim() === "☯ claim") {
+                button.textContent = "Verify";
+                button.style.backgroundColor = "#ffc107";
+                window.open(url, "_blank");
+            } else if (button.textContent.trim() === "Verify") {
+                // Open the link again
+                window.open(url, "_blank");
 
-        function completeTask(button, reward, url) {
-            // Open the task link in a new tab
-            window.open(url, "_blank");
+                // Update balance
+                balance += reward;
+                document.getElementById("balance").textContent = balance;
 
-            // Update balance
-            balance += reward;
-            document.getElementById("balance").textContent = balance;
-
-            // Remove the task from the list
-            const taskElement = button.closest(".task");
-            taskElement.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-            taskElement.style.opacity = 0;
-            taskElement.style.transform = "translateY(-20px)";
-            setTimeout(() => taskElement.remove(), 500);
+                // Remove the task after claiming
+                const task = document.getElementById(taskId);
+                if (task) {
+                    task.remove();
+                }
+            }
         }
     </script>
 </body>
