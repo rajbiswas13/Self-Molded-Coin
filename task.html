@@ -136,9 +136,8 @@
     <!-- Page Header -->
     <h1>Shelf Molded</h1>
 
-    <!-- Balance Container -->
     <div id="balance-container">
-        <span id="balance">0</span> ☯ total Self Molded Coin
+        <span id="balance">1100</span> ☯ total Self Molded Coin
     </div>
 
     <!-- Tasks Section -->
@@ -156,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(300)">☯ claim</button>
+            <button class="task-button" onclick="completeTask(300, 'reword.html')">☯ claim</button>
         </div>
 
         <div class="task">
@@ -172,7 +171,13 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(200)">☯ claim</button>
+            <button class="task-button" onclick="completeTask(200, 'verify.html')">☯ claim</button>
+        </div>
+    </div>
+
+    <div class="coin-container">
+        <div class="task-image">
+            <img src="material/images/logo.png" width="80%">
         </div>
     </div>
 
@@ -202,34 +207,18 @@
 
     <!-- JavaScript -->
     <script>
-        // Function to load balance from localStorage
-        function loadBalance() {
-            const storedBalance = localStorage.getItem('balance');
-            const balanceElement = document.getElementById('balance');
-            if (storedBalance) {
-                balanceElement.textContent = storedBalance;
-            } else {
-                balanceElement.textContent = '0'; // Default balance
-            }
-        }
-
-        // Function to update balance
-        function completeTask(points) {
-            const balanceElement = document.getElementById('balance');
+        // Task Complete Function
+        function completeTask(points, redirectUrl) {
+            // Update the balance
+            const balanceElement = document.getElementById("balance");
             let currentBalance = parseInt(balanceElement.textContent);
-            currentBalance += points;
+            balanceElement.textContent = currentBalance + points;
 
-            // Update the balance display
-            balanceElement.textContent = currentBalance;
-
-            // Save the updated balance to localStorage
-            localStorage.setItem('balance', currentBalance);
+            // Redirect to external task or verification link
+            window.location.href = redirectUrl;
         }
-
-        // Load balance on page load
-        window.onload = loadBalance;
     </script>
-    <script>
+<script>
     // Update balance in local storage
     function updateBalance(points) {
         let currentBalance = parseInt(localStorage.getItem('balance')) || 0;
@@ -257,6 +246,6 @@
     window.onload = function() {
         displayBalance();
     };
-    </script>
+</script>
 </body>
-    </html>
+</html>
