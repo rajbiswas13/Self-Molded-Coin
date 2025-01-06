@@ -208,6 +208,62 @@
 
     <!-- JavaScript -->
     <script>
+        // Track completed tasks in localStorage
+        const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+
+        // Check if a task is completed
+        function isTaskCompleted(taskId) {
+            return completedTasks.includes(taskId);
+        }
+
+        // Mark a task as completed
+        function markTaskCompleted(taskId) {
+            if (!isTaskCompleted(taskId)) {
+                completedTasks.push(taskId);
+                localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+            }
+        }
+
+        // Verify and complete a task
+        function verifyTask(button, reward, url, taskId) {
+            if (button.textContent.trim() === "☯ claim") {
+                button.textContent = "Verify";
+                button.style.backgroundColor = "#ffc107";
+                window.open(url, "_blank");
+            } else if (button.textContent.trim() === "Verify") {
+                window.open(url, "_blank");
+
+                let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+                currentBalance += reward;
+                localStorage.setItem("balance", currentBalance);
+
+                document.getElementById("balance").textContent = currentBalance;
+
+                // Mark the task as completed
+                markTaskCompleted(taskId);
+
+                // Remove the task from the page
+                const task = document.getElementById(taskId);
+                if (task) {
+                    task.remove();
+                }
+            }
+        }
+
+        // Display balance and hide completed tasks on page load
+        window.onload = function () {
+            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+            document.getElementById("balance").textContent = currentBalance;
+
+            completedTasks.forEach(taskId => {
+                const task = document.getElementById(taskId);
+                if (task) {
+                    task.remove();
+                }
+            });
+        };
+    </script>
+    <script>
         // Task Complete Function
         function completeTask(points, redirectUrl) {
             // Update the balance
