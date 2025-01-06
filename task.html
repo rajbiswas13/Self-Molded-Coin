@@ -229,5 +229,34 @@
         // Load balance on page load
         window.onload = loadBalance;
     </script>
+    <script>
+    // Update balance in local storage
+    function updateBalance(points) {
+        let currentBalance = parseInt(localStorage.getItem('balance')) || 0;
+        currentBalance += points;
+        localStorage.setItem('balance', currentBalance);
+    }
+
+    // Retrieve and display balance from local storage
+    function displayBalance() {
+        let currentBalance = parseInt(localStorage.getItem('balance')) || 0;
+        const balanceElement = document.getElementById('balance');
+        if (balanceElement) {
+            balanceElement.innerText = currentBalance;
+        }
+    }
+
+    // Simulate task completion
+    function completeTask(points) {
+        updateBalance(points);
+        alert('You earned ' + points + ' points! Your balance has been updated.');
+        window.location.reload(); // Optional: Reload the page to reflect changes
+    }
+
+    // Call displayBalance on the Balance page when the page loads
+    window.onload = function() {
+        displayBalance();
+    };
+    </script>
 </body>
     </html>
