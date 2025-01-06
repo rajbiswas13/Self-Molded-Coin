@@ -6,7 +6,6 @@
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CSS Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -100,44 +99,27 @@
             border: 1px solid #000000;
         }
 
-        nav.bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #222;
-            padding: 10px 0;
+        .timer-container {
+            margin: 20px auto;
+            font-size: 18px;
+        }
+
+        .back-button {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #444;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        nav.bottom-nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        nav.bottom-nav a i {
-            font-size: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .task-container {
-                max-width: 100%;
-            }
-
-            .task-button {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .task h4 {
-                font-size: 16px;
-            }
+        .back-button:hover {
+            background-color: #ffa500;
         }
     </style>
 </head>
@@ -150,10 +132,10 @@
     </div>
     <h2><b>_______________</b></h2>
 
-    <section class="tasks scrollable">
+    <section class="tasks scrollable" id="tasks">
         <!-- Task 1 -->
-        <div class="task-container">
-            <div class="task" id="task1">
+        <div class="task-container" id="task1">
+            <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
                         <img src="material/images/you.gif" width="45px" alt="">
@@ -166,78 +148,119 @@
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
+                <button class="task-button" onclick="startTaskTimer('https://youtube.com/@tho7142?sub_confirmation=1', 100, 'task1')">☯ claim</button>
             </div>
         </div>
         <!-- Task 2 -->
-        <div class="task-container">
-            <div class="task" id="task2">
+        <div class="task-container" id="task2">
+            <div class="task">
                 <div class="task-detail">
                     <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
+                        <img src="material/images/THO 57.png" width="45px" alt="">
                     </div>
                     <div>
-                        <h4>Watch Video</h4>
+                        <h4>Subscribe</h4>
                         <div class="task-data">
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200</h5>
+                            <h5>100</h5>
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
+                <button class="task-button" onclick="startTaskTimer('https://tohomeonline.com', 500, 'task')">☯ claim</button>
             </div>
         </div>
     </section>
 
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
+    <div id="timer-container" class="timer-container" style="display: none;">
+        <p id="timer">Time left: 60 seconds</p>
+        <button class="back-button" onclick="returnToTaskPage()">Back</button>
+    </div>
 
     <script>
-        function verifyTask(button, reward, url, taskId) {
-            if (button.textContent.trim() === "☯ claim") {
-                button.textContent = "Verify";
-                button.style.backgroundColor = "#ffc107";
-                window.open(url, "_blank");
-            } else if (button.textContent.trim() === "Verify") {
-                window.open(url, "_blank");
+        let taskTimer; // Timer reference
+        let countdown; // Countdown reference
 
-                let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-                currentBalance += reward;
-                localStorage.setItem("balance", currentBalance);
+        // Start a task timer
+        function startTaskTimer(url, reward, taskId) {
+            // Show the timer and hide the task list
+            document.getElementById("tasks").style.display = "none";
+            document.getElementById("timer-container").style.display = "block";
 
-                document.getElementById("balance").textContent = currentBalance;
+            // Open the external link
+            window.open(url, "_blank");
 
+            // Initialize the countdown
+            let timeLeft = 60; // 60 seconds
+            const timerElement = document.getElementById("timer");
+
+            // Update the timer display every second
+            countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = "Time left: " + timeLeft + " seconds";
+                if (timeLeft <= 0) {
+                    clearInterval(countdown); // Stop the countdown
+                    completeTask(reward, taskId); // Complete the task automatically
+                }
+            }, 1000);
+        }
+
+        // Complete a task
+        function completeTask(reward, taskId) {
+            // Update balance in localStorage
+            let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+            currentBalance += reward;
+            localStorage.setItem("balance", currentBalance);
+
+            // Update the balance display
+            document.getElementById("balance").textContent = currentBalance;
+
+            // Mark the task as completed
+            markTaskCompleted(taskId);
+
+            // Return to the task page
+            returnToTaskPage();
+        }
+
+        // Return to the task page
+        function returnToTaskPage() {
+            clearInterval(countdown); // Stop the countdown
+            document.getElementById("tasks").style.display = "block";
+            document.getElementById("timer-container").style.display = "none";
+
+            // Remove the task from the page
+            const task = document.getElementById(taskId);
+            if (task) {
+                task.remove();
+            }
+        }
+
+        // Track completed tasks in localStorage
+        const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+
+        // Check if a task is completed
+        function isTaskCompleted(taskId) {
+            return completedTasks.includes(taskId);
+        }
+
+        // Mark a task as completed
+        function markTaskCompleted(taskId) {
+            if (!isTaskCompleted(taskId)) {
+                completedTasks.push(taskId);
+                localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+            }
+        }
+
+        // Display balance and hide completed tasks on page load
+        window.onload = function () {
+            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+            document.getElementById("balance").textContent = currentBalance;
+
+            completedTasks.forEach(taskId => {
                 const task = document.getElementById(taskId);
                 if (task) {
                     task.remove();
                 }
-            }
-        }
-
-        // Display balance on page load
-        window.onload = function () {
-            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-            document.getElementById("balance").textContent = currentBalance;
+            });
         };
     </script>
 </body>
