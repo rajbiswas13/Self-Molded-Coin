@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Tasks</title>
+    <title>External Task Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CSS Styling */
+        /* Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -91,15 +91,6 @@
             background-color: #a2aaa0;
         }
 
-        .tasks.scrollable {
-            max-height: 590px; 
-            overflow-y: auto; 
-            margin: 20px auto;
-            width: 90%;       
-            padding-right: 10px;
-            border: 1px solid #000000; 
-        }
-
         nav.bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -142,125 +133,50 @@
     </style>
 </head>
 <body>
-    <!-- HTML Content -->
+    <!-- Page Header -->
+    <h1>Shelf Molded</h1>
+
+    <!-- Balance Container -->
     <div id="balance-container">
-        <h2><b>_____________</b></h2>
-        <h2><b> TASKS </b></h2>
         <span id="balance">0</span> ☯ total Self Molded Coin
     </div>
-    <h2><b>_______________</b></h2>
 
-    <section class="tasks scrollable">
-        <!-- Task 1 -->
-        <div class="task-container">
-            <div class="task" id="task1">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/THO 57.png" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>website visit</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100</h5>
-                        </div>
+    <!-- Tasks Section -->
+    <div class="task-container">
+        <div class="task">
+            <div class="task-detail">
+                <div class="task-image">
+                    <img src="material/images/logo.png" width="45px" alt="">
+                </div>
+                <div>
+                    <h4>claim rewards</h4>
+                    <div class="task-data">
+                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                        <h5>300</h5>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 500, 'https://tohomeonline.com/', 'task1')">☯ claim</button>
             </div>
+            <button class="task-button" onclick="completeTask(300)">☯ claim</button>
         </div>
-        <!-- Task 2 -->
-        <div class="task-container">
-            <div class="task" id="task2">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Watch Video</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
-            </div>
-        </div>
-         <!-- Task 3 -->
-        <div class="task-container">
-            <div class="task" id="task1">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Subscribe</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
-            </div>
-        </div>
-        <!-- Task 4 -->
-        <div class="task-container">
-            <div class="task" id="task2">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Watch Video</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
-            </div>
-        </div>
-         <!-- Task 5 -->
-        <div class="task-container">
-            <div class="task" id="task1">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Subscribe</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
-            </div>
-        </div>
-        <!-- Task  6-->
-        <div class="task-container">
-            <div class="task" id="task2">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Watch Video</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
-            </div>
-        </div>
-    </section>
 
+        <div class="task">
+            <div class="task-detail">
+                <div class="task-image">
+                    <img src="material/images/logo.png" width="45px" alt="">
+                </div>
+                <div>
+                    <h4>verify and earn</h4>
+                    <div class="task-data">
+                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                        <h5>200</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="task-button" onclick="completeTask(200)">☯ claim</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -284,29 +200,34 @@
         </a>
     </nav>
 
+    <!-- JavaScript -->
     <script>
-        let balance = 0; // Initialize the balance
-
-        function verifyTask(button, reward, url, taskId) {
-            if (button.textContent.trim() === "☯ claim") {
-                button.textContent = "Verify";
-                button.style.backgroundColor = "#ffc107";
-                window.open(url, "_blank");
-            } else if (button.textContent.trim() === "Verify") {
-                // Open the link again
-                window.open(url, "_blank");
-
-                // Update balance
-                balance += reward; // Add points to the balance
-                document.getElementById("balance").textContent = balance; // Update the balance on the page
-
-                // Remove the task after claiming
-                const task = document.getElementById(taskId);
-                if (task) {
-                    task.remove();
-                }
+        // Function to load balance from localStorage
+        function loadBalance() {
+            const storedBalance = localStorage.getItem('balance');
+            const balanceElement = document.getElementById('balance');
+            if (storedBalance) {
+                balanceElement.textContent = storedBalance;
+            } else {
+                balanceElement.textContent = '0'; // Default balance
             }
         }
+
+        // Function to update balance
+        function completeTask(points) {
+            const balanceElement = document.getElementById('balance');
+            let currentBalance = parseInt(balanceElement.textContent);
+            currentBalance += points;
+
+            // Update the balance display
+            balanceElement.textContent = currentBalance;
+
+            // Save the updated balance to localStorage
+            localStorage.setItem('balance', currentBalance);
+        }
+
+        // Load balance on page load
+        window.onload = loadBalance;
     </script>
 </body>
-</html>
+    </html>
