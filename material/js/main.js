@@ -82,6 +82,32 @@ setInterval(()=> {
         body.querySelector('#power').textContent = `${Number(power) + Number(count)}`;
         body.querySelector('.progress').style.width = `${(100 * power) / total}%`;
     }
-}, 1000);
+}, 1000);// Update balance in local storage
+function updateBalance(points) {
+    let currentBalance = parseInt(localStorage.getItem('balance')) || 0;
+    currentBalance += points;
+    localStorage.setItem('balance', currentBalance);
+}
+
+// Retrieve and display balance from local storage
+function displayBalance() {
+    let currentBalance = parseInt(localStorage.getItem('balance')) || 0;
+    const balanceElement = document.getElementById('balance');
+    if (balanceElement) {
+        balanceElement.innerText = currentBalance;
+    }
+}
+
+// Simulate task completion
+function completeTask(points) {
+    updateBalance(points);
+    alert('You earned ' + points + ' points! Your balance has been updated.');
+    window.location.reload(); // Optional: Reload the page to reflect changes
+}
+
+// Call displayBalance on the Balance page when the page loads
+window.onload = function() {
+    displayBalance();
+};
 
  This is the main JS file. Where in the file do you have to provide the code? Please give me the complete code.
