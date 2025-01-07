@@ -1,4 +1,14 @@
 [
-    { "rank": 1, "name": "John Doe", "points": 100000 },
-    { "rank": 2, "name": "Jane Smith", "points": 95000 }
+    {
+        "id": 1,
+        "name": "John Doe",
+        "dp_url": "https://via.placeholder.com/40", // Replace with actual DP URL
+        "points": 5000
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "dp_url": "https://via.placeholder.com/40", // Replace with actual DP URL
+        "points": 4500
+    }
 ]
