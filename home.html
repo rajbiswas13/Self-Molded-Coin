@@ -3,17 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>External Task Page</title>
+    <title>Daily Tasks with Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000; 
-            color: #fff; 
+            background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 0;
+        }
+
+        .login-container, .daily-tasks-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #333030;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-button, .task-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-button:hover, .task-button:hover {
+            background-color: #0056b3;
         }
 
         #balance-container {
@@ -21,276 +57,101 @@
             font-size: 18px;
         }
 
-        .task-container {
-            margin: 10px auto;
-            max-width: 600px;
-        }
-
-        .task {
-            margin: 10px auto;
-            padding: 20px;
+        .daily-tasks-container .task {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #444;
+            border-radius: 8px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border: 1px solid #000000; 
-            border-radius: 12px;
-            background-color: #333030; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            width: 80%;
-        }
-
-        .task:hover {
-            transform: translateY(-5px);
-        }
-
-        .task-detail {
-            display: flex;
             align-items: center;
         }
 
-        .task-image img {
-            border-radius: 8px;
-            margin-right: 10px;
-        }
-
-        .task h4 {
-            margin: 0;
-            font-size: 18px;
-            color: #f2f2f2;
-        }
-
-        .task-data {
-            display: flex;
-            align-items: center;
-            margin-top: 8px;
-        }
-
-        .task-data img {
-            margin-right: 5px;
-        }
-
-        .task-data h5 {
-            margin: 0;
-            color: #ffcc00;
-            font-size: 18px;
-        }
-
-        .task-button {
-            background-color: #ffffff; 
-            color: rgb(0, 0, 0);
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        .task-button:hover {
-            background-color: #a2aaa0;
-        }
-
-        nav.bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #222;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #444;
-        }
-
-        nav.bottom-nav a {
-            color: #fff;
-            text-decoration: none;
+        .daily-tasks-container .task-button {
+            padding: 5px 10px;
             font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        nav.bottom-nav a i {
-            font-size: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .task-container {
-                max-width: 100%;
-            }
-
-            .task-button {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .task h4 {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Page Header -->
-    <h1>Shelf Molded</h1>
+    <!-- Login Section -->
+    <div class="login-container" id="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
 
+    <!-- Balance Display -->
     <div id="balance-container">
-        <h2><b>_____________</b></h2>
-        <h2><b> TASKS </b></h2>
-        <span id="balance">0</span> ☯ total Self Molded Coin</div>
-
-    <!-- Tasks Section -->
-    <div class="task-container">
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>claim rewards</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>300</h5>
-                    </div>
-                </div>
-            </div>
-            <button class="task-button" onclick="completeTask(300, 'reword.html')">☯ claim</button>
-        </div>
-        <!-- Task 2 -->
-        <div class="task-container" id="task2">
-            <div class="task">
-                <div class="task-detail">
-                    <div class="task-image">
-                        <img src="material/images/you.gif" width="45px" alt="">
-                    </div>
-                    <div>
-                        <h4>Watch Video</h4>
-                        <div class="task-data">
-                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200</h5>
-                        </div>
-                    </div>
-                </div>
-                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
-            </div>
-        </div>
-
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>verify and earn</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>200</h5>
-                    </div>
-                </div>
-            </div>
-            <button class="task-button" onclick="completeTask(200, 'verify.html')">☯ claim</button>
-        </div>
+        <h2>Balance: <span id="balance">0</span> ☯ Self Molded Coin</h2>
     </div>
 
-    <div class="coin-container">
-        <div class="task-image">
-            <img src="material/images/logo.png" width="80%">
+    <!-- Daily Tasks -->
+    <div class="daily-tasks-container" id="dailyTasks" style="display: none;">
+        <h2>Daily Tasks</h2>
+        <div class="task">
+            <span>Task 1: Complete Daily Login</span>
+            <button class="task-button" onclick="completeTask(100, 'dailyTask1')">Complete</button>
         </div>
+        <div class="task">
+            <span>Task 2: Claim Your Reward</span>
+            <button class="task-button" onclick="completeTask(200, 'dailyTask2')">Complete</button>
+        </div>
+        <button class="task-button" onclick="redirectToTaskPage()">Go to Task Page</button>
     </div>
-
-    <!-- Bottom Navigation Menu -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
 
     <!-- JavaScript -->
     <script>
-        // Track completed tasks in localStorage
+        // Track balance and completed tasks
+        const balance = localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 0;
         const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-        // Check if a task is completed
-        function isTaskCompleted(taskId) {
-            return completedTasks.includes(taskId);
-        }
+        // Update balance on page load
+        document.getElementById("balance").textContent = balance;
 
-        // Mark a task as completed
-        function markTaskCompleted(taskId) {
-            if (!isTaskCompleted(taskId)) {
+        // Login handler
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Simulate login
+            localStorage.setItem("loggedInUser", JSON.stringify({ username }));
+            alert("Login successful!");
+
+            // Show daily tasks and hide login form
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("dailyTasks").style.display = "block";
+        });
+
+        // Complete task function
+        function completeTask(points, taskId) {
+            if (!completedTasks.includes(taskId)) {
+                // Add points to balance
+                const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+                const newBalance = currentBalance + points;
+                localStorage.setItem("balance", newBalance);
+                document.getElementById("balance").textContent = newBalance;
+
+                // Mark task as completed
                 completedTasks.push(taskId);
                 localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+                alert(`Task completed! You earned ${points} coins.`);
+            } else {
+                alert("Task already completed!");
             }
         }
 
-        // Verify and complete a task
-        function verifyTask(button, reward, url, taskId) {
-            if (button.textContent.trim() === "☯ claim") {
-                button.textContent = "Verify";
-                button.style.backgroundColor = "#ffc107";
-                window.open(url, "_blank");
-            } else if (button.textContent.trim() === "Verify") {
-                window.open(url, "_blank");
-
-                let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-                currentBalance += reward;
-                localStorage.setItem("balance", currentBalance);
-
-                document.getElementById("balance").textContent = currentBalance;
-
-                // Mark the task as completed
-                markTaskCompleted(taskId);
-
-                // Remove the task from the page
-                const task = document.getElementById(taskId);
-                if (task) {
-                    task.remove();
-                }
-            }
-        }
-
-        // Display balance and hide completed tasks on page load
-        window.onload = function () {
-            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-            document.getElementById("balance").textContent = currentBalance;
-
-            completedTasks.forEach(taskId => {
-                const task = document.getElementById(taskId);
-                if (task) {
-                    task.remove();
-                }
-            });
-        };
-    </script>
-    <script>
-        // Task Complete Function
-        function completeTask(points, redirectUrl) {
-            // Update the balance
-            const balanceElement = document.getElementById("balance");
-            let currentBalance = parseInt(balanceElement.textContent);
-            balanceElement.textContent = currentBalance + points;
-
-            // Redirect to external task or verification link
-            window.location.href = redirectUrl;
+        // Redirect to task page
+        function redirectToTaskPage() {
+            window.location.href = "task.html"; // Replace with your task page URL
         }
     </script>
 </body>
