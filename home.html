@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Shelf Molded</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Task Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -17,13 +18,12 @@
 
         #balance-container {
             margin: 20px;
-            font-size: 5vw; /* Responsive font size */
-            color: #ffcc00;
+            font-size: 18px;
         }
 
         .task-container {
             margin: 10px auto;
-            max-width: 90%;
+            max-width: 600px;
         }
 
         .task {
@@ -32,12 +32,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #333; 
+            border: 1px solid #000000; 
             border-radius: 12px;
-            background-color: #222; 
+            background-color: #333030; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
-            width: 100%;
+            width: 80%;
         }
 
         .task:hover {
@@ -56,9 +56,8 @@
 
         .task h4 {
             margin: 0;
-            font-size: 4vw; /* Responsive font size */
+            font-size: 18px;
             color: #f2f2f2;
-            text-align: left;
         }
 
         .task-data {
@@ -74,31 +73,22 @@
         .task-data h5 {
             margin: 0;
             color: #ffcc00;
-            font-size: 4vw; /* Responsive font size */
+            font-size: 18px;
         }
 
         .task-button {
             background-color: #ffffff; 
-            color: #000;
+            color: rgb(0, 0, 0);
             border: none;
             padding: 10px 20px;
-            font-size: 4vw; /* Responsive font size */
+            font-size: 16px;
             cursor: pointer;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: background-color 0.3s ease;
         }
 
         .task-button:hover {
             background-color: #a2aaa0;
-        }
-
-        .coin-container img {
-            width: 20vw; /* Responsive size */
-            margin: 20px auto;
-            display: block;
         }
 
         nav.bottom-nav {
@@ -116,14 +106,14 @@
         nav.bottom-nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 4vw; /* Responsive font size */
+            font-size: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         nav.bottom-nav a i {
-            font-size: 5vw; /* Responsive icon size */
+            font-size: 20px;
         }
 
         @media (max-width: 600px) {
@@ -133,22 +123,25 @@
 
             .task-button {
                 padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Page Header -->
-    <h1 style="font-size: 6vw;">Shelf Molded</h1>
+    <h1>Shelf Molded</h1>
 
-    <!-- Balance Container -->
     <div id="balance-container">
         <span id="balance">1100</span> ☯ total Self Molded Coin
     </div>
 
     <!-- Tasks Section -->
     <div class="task-container">
-        <!-- Task 1 -->
         <div class="task">
             <div class="task-detail">
                 <div class="task-image">
@@ -165,7 +158,6 @@
             <button class="task-button" onclick="completeTask(300, 'reword.html')">☯ claim</button>
         </div>
 
-        <!-- Task 2 -->
         <div class="task">
             <div class="task-detail">
                 <div class="task-image">
@@ -183,9 +175,10 @@
         </div>
     </div>
 
-    <!-- Coin Logo -->
     <div class="coin-container">
-        <img src="material/images/logo.png" alt="Coin Logo">
+        <div class="task-image">
+            <img src="material/images/logo.png" width="80%">
+        </div>
     </div>
 
     <!-- Bottom Navigation Menu -->
@@ -212,17 +205,16 @@
         </a>
     </nav>
 
+    <!-- JavaScript -->
     <script>
-        let completedTasksCount = 0;
-
-        // Function to complete a task
+        // Task Complete Function
         function completeTask(points, redirectUrl) {
             // Update the balance
             const balanceElement = document.getElementById("balance");
-            let currentBalance = parseInt(balanceElement.textContent) || 0;
+            let currentBalance = parseInt(balanceElement.textContent);
             balanceElement.textContent = currentBalance + points;
 
-            // Redirect to the provided URL
+            // Redirect to external task or verification link
             window.location.href = redirectUrl;
         }
     </script>
