@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,17 +20,19 @@
             font-size: 18px;
         }
 
-        .conversion-container {
+        .conversion-rates {
             margin: 20px auto;
             max-width: 600px;
             padding: 20px;
             background-color: #222;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #ffcc00;
         }
 
-        .conversion-container h4 {
+        .conversion-rates h4 {
             margin: 10px 0;
+            font-size: 20px;
         }
 
         .task-container {
@@ -73,45 +74,9 @@
             color: #f2f2f2;
         }
 
-        .task-data {
-            display: flex;
-            align-items: center;
-            margin-top: 8px;
-        }
-
-        .task-data img {
-            margin-right: 5px;
-        }
-
-        .task-data h5 {
-            margin: 0;
-            color: #ffcc00;
-            font-size: 18px;
-        }
-
-        .task-button {
-            background-color: #ffffff; 
-            color: rgb(0, 0, 0);
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        .task-button:hover {
-            background-color: #a2aaa0;
-        }
-
         @media (max-width: 600px) {
             .task-container {
                 max-width: 100%;
-            }
-
-            .task-button {
-                padding: 10px 15px;
-                font-size: 14px;
             }
 
             .task h4 {
@@ -128,26 +93,17 @@
         <h2><b>💸</b></h2><br>
         <span id="self-molded-coins">0</span> ☯ Self Molded Coins<br>
         <span id="diamonds">0</span> 💎 Diamonds<br>
-        <span id="beans">0</span> 🫘 Beans<br><br>
+        <span id="beans">100000</span> 🫘 Beans<br><br>
     </div>
 
-    <!-- Conversion Section -->
-    <div class="conversion-container">
-        <h4>Convert Beans to Diamonds</h4>
-        <button onclick="convertBeansToDiamonds()">Convert 10,000 Beans to 1 Diamond</button>
-        <h4>Convert Diamonds to Self Molded Coins</h4>
-        <button onclick="convertDiamondsToCoins()">Convert 1,000 Diamonds to 1 Self Molded Coin</button>
+    <!-- Conversion Rates -->
+    <div class="conversion-rates">
+        <h4>Conversion Rates:</h4>
+        <p>🫘 10,000 Beans = 1 💎 Diamond</p>
+        <p>💎 1,000 Diamonds = 1 ☯ Self Molded Coin</p>
     </div>
 
-    <h2><b>Coming Soon!!</b></h2>
-
-    <br>
-    <a href="detail.html" class="nav-item">
-        <i class="fas fa-info-circle"></i>
-        <span>DETAILS</span>
-    </a>
-    <br>
-
+    <!-- Task Section -->
     <div class="task-container">
         <div class="task">
             <div class="task-detail">
@@ -155,19 +111,16 @@
                     <img src="material/images/ton.png" width="45px" alt="">
                 </div>
                 <div>
-                    <h4>Link your wallet </h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>💳</h5>
-                    </div>
+                    <h4>Link your wallet</h4>
                 </div>
             </div>
-            <button onclick="window.location.href='wat.html'">CONNECT</button>
+            <button onclick="alert('Wallet Connected!')">CONNECT</button>
         </div>
-        <br><br>
+        <br>
         <img src="material/images/logo.png" width="50%">
     </div>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -192,44 +145,40 @@
     </nav>
 
     <script>
-        // Initialize balances
-        let beans = 100000; // Default beans
-        let diamonds = 0; // Default diamonds
-        let selfMoldedCoins = 0; // Default coins
+        let beans = 100000; // Starting Beans
+        let diamonds = 0; // Starting Diamonds
+        let selfMoldedCoins = 0; // Starting Self Molded Coins
 
-        // Display initial balances
+        // Function to display balances
         function updateDisplay() {
             document.getElementById('beans').innerText = beans;
             document.getElementById('diamonds').innerText = diamonds;
             document.getElementById('self-molded-coins').innerText = selfMoldedCoins;
         }
 
-        // Convert Beans to Diamonds
-        function convertBeansToDiamonds() {
-            if (beans >= 10000) {
+        // Function to handle automatic conversions
+        function autoConvert() {
+            // Convert Beans to Diamonds
+            while (beans >= 10000) {
                 beans -= 10000;
                 diamonds += 1;
-                alert('Successfully converted 10,000 Beans to 1 Diamond!');
-            } else {
-                alert('Not enough Beans!');
             }
-            updateDisplay();
-        }
 
-        // Convert Diamonds to Self Molded Coins
-        function convertDiamondsToCoins() {
-            if (diamonds >= 1000) {
+            // Convert Diamonds to Self Molded Coins
+            while (diamonds >= 1000) {
                 diamonds -= 1000;
                 selfMoldedCoins += 1;
-                alert('Successfully converted 1,000 Diamonds to 1 Self Molded Coin!');
-            } else {
-                alert('Not enough Diamonds!');
             }
+
+            // Update the display after conversions
             updateDisplay();
         }
 
-        // Display balances on page load
-        window.onload = updateDisplay;
+        // Call autoConvert periodically to check and convert balances
+        setInterval(autoConvert, 1000);
+
+        // Initial display update
+        updateDisplay();
     </script>
 </body>
 </html>
