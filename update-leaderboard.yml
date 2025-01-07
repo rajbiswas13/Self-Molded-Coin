@@ -1,0 +1,32 @@
+name: Update Leaderboard
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-leaderboard:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Fetch leaderboard data (replace URL with your API endpoint or generator script)
+      - name: Fetch leaderboard data
+        run: |
+          echo '[
+              { "rank": 1, "name": "Updated User", "points": 150000 },
+              { "rank": 2, "name": "Another User", "points": 145000 }
+          ]' > leaderboard.json
+
+      # Step 3: Commit and push changes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add leaderboard.json
+          git commit -m "Updated leaderboard data"
+          git push
