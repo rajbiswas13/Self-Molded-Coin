@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shelf Molded</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -17,7 +17,7 @@
 
         #balance-container {
             margin: 20px;
-            font-size: 20px;
+            font-size: 5vw; /* Responsive font size */
             color: #ffcc00;
         }
 
@@ -56,7 +56,7 @@
 
         .task h4 {
             margin: 0;
-            font-size: 18px;
+            font-size: 4vw; /* Responsive font size */
             color: #f2f2f2;
             text-align: left;
         }
@@ -74,7 +74,7 @@
         .task-data h5 {
             margin: 0;
             color: #ffcc00;
-            font-size: 18px;
+            font-size: 4vw; /* Responsive font size */
         }
 
         .task-button {
@@ -82,7 +82,7 @@
             color: #000;
             border: none;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 4vw; /* Responsive font size */
             cursor: pointer;
             border-radius: 8px;
             display: flex;
@@ -96,7 +96,7 @@
         }
 
         .coin-container img {
-            width: 80px;
+            width: 20vw; /* Responsive size */
             margin: 20px auto;
             display: block;
         }
@@ -116,14 +116,14 @@
         nav.bottom-nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 4vw; /* Responsive font size */
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         nav.bottom-nav a i {
-            font-size: 20px;
+            font-size: 5vw; /* Responsive icon size */
         }
 
         @media (max-width: 600px) {
@@ -133,18 +133,13 @@
 
             .task-button {
                 padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .task h4 {
-                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Page Header -->
-    <h1>Shelf Molded</h1>
+    <h1 style="font-size: 6vw;">Shelf Molded</h1>
 
     <!-- Balance Container -->
     <div id="balance-container">
