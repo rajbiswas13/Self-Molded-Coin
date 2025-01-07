@@ -6,7 +6,6 @@
     <title>External Task Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -91,24 +90,9 @@
             background-color: #a2aaa0;
         }
 
-        #message-container {
+        #daily-task-message {
+            display: none;
             margin-top: 20px;
-            display: none; /* Initially hidden */
-        }
-
-        #message-container button {
-            background-color: #ffcc00;
-            border: none;
-            padding: 10px 20px;
-            color: #000;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        #message-container button:hover {
-            background-color: #d4af37;
         }
 
         nav.bottom-nav {
@@ -154,7 +138,7 @@
 </head>
 <body>
     <!-- Page Header -->
-    <h1>Self Molded</h1>
+    <h1>Shelf Molded</h1>
 
     <div id="balance-container">
         <h2><b>_____________</b></h2>
@@ -164,6 +148,7 @@
 
     <!-- Tasks Section -->
     <div class="task-container">
+        <!-- Task 1 -->
         <div class="task">
             <div class="task-detail">
                 <div class="task-image">
@@ -180,6 +165,7 @@
             <button class="task-button" onclick="completeTask(300, 'reword.html')">☯ claim</button>
         </div>
 
+        <!-- Task 2 -->
         <div class="task">
             <div class="task-detail">
                 <div class="task-image">
@@ -193,14 +179,14 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(200, 'verify.html')">☯ claim</button>
+            <button class="task-button" onclick="completeTask(200, 'https://youtube.com/watch?v=dQw4w9WgXcQ')">☯ claim</button>
         </div>
     </div>
 
-    <!-- Daily Tasks Message -->
-    <div id="message-container">
-        <p><strong>Daily Tasks</strong></p>
-        <button onclick="redirectToTasks()">Go to Tasks</button>
+    <!-- Daily Task Message -->
+    <div id="daily-task-message">
+        <h2>Daily Tasks</h2>
+        <button class="task-button" onclick="redirectToTasks()">Go to Task Page</button>
     </div>
 
     <!-- Bottom Navigation Menu -->
@@ -227,29 +213,31 @@
         </a>
     </nav>
 
-    <!-- JavaScript -->
     <script>
-        function completeTask(points, redirectUrl) {
-            // Update balance
-            const balanceElement = document.getElementById("balance");
-            let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-            currentBalance += points;
-            balanceElement.textContent = currentBalance;
-            localStorage.setItem("balance", currentBalance);
+        let completedTasksCount = 0;
 
-            // Show daily tasks message
-            document.getElementById("message-container").style.display = "block";
+        // Function to complete a task
+        function completeTask(points, redirectUrl) {
+            // Update the balance
+            const balanceElement = document.getElementById("balance");
+            let currentBalance = parseInt(balanceElement.textContent) || 0;
+            balanceElement.textContent = currentBalance + points;
+
+            completedTasksCount++;
+
+            // Check if the user has completed two tasks
+            if (completedTasksCount === 2) {
+                document.getElementById("daily-task-message").style.display = "block";
+            }
+
+            // Redirect to the provided URL
+            window.location.href = redirectUrl;
         }
 
+        // Function to redirect to the task page
         function redirectToTasks() {
             window.location.href = "task.html";
         }
-
-        // Display balance on page load
-        window.onload = function () {
-            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-            document.getElementById("balance").textContent = currentBalance;
-        };
     </script>
 </body>
 </html>
