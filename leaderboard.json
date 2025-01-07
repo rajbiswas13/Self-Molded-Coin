@@ -4,7 +4,7 @@ const axios = require('axios');
 // Replace with your bot token
 const BOT_TOKEN = "7286785257:AAEvrkMIl1PLPVYPAfSWZ13NxEWHJZPvhB4";
 
-// Example user data to fetch
+// Example user data (replace this with the real user IDs and their points)
 const users = [
     { id: 123456789, points: 7000 },
     { id: 987654321, points: 6500 },
@@ -24,18 +24,18 @@ async function fetchUserDetails(user) {
         );
 
         const photoUrl =
-            photoResponse.data.result.photos[0]?.[0]?.file_id
+            photoResponse.data.result.photos?.[0]?.[0]?.file_id
                 ? `https://api.telegram.org/file/bot${BOT_TOKEN}/${photoResponse.data.result.photos[0][0].file_id}`
-                : null;
+                : "https://via.placeholder.com/40";
 
         return {
             id: user.id,
             name: chat.username || `${chat.first_name} ${chat.last_name}`,
-            dp_url: photoUrl || "https://via.placeholder.com/40",
-            points: user.points
+            dp_url: photoUrl,
+            points: 0 // Reset points to zero
         };
     } catch (error) {
-        console.error(`Error fetching data for user ${user.id}:`, error);
+        console.error(`Error fetching data for user ${user.id}:`, error.message);
         return null;
     }
 }
@@ -48,8 +48,12 @@ async function updateLeaderboard() {
         if (userDetails) leaderboard.push(userDetails);
     }
 
+    // Save the updated leaderboard
     fs.writeFileSync("leaderboard.json", JSON.stringify(leaderboard, null, 4));
-    console.log("Leaderboard updated!");
+    console.log("Leaderboard has been reset and updated!");
 }
 
-updateLeaderboard();
+// Run the script
+(async () => {
+    await updateLeaderboard();
+})();
