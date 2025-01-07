@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Tasks with Login</title>
+    <title>Daily Tasks with Login and Signup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000;
-            color: #fff;
+            background: url('your-homepage-image.jpg') no-repeat center center fixed; /* Replace with your image */
+            background-size: cover;
             margin: 0;
             padding: 0;
+            color: #fff;
         }
 
-        .login-container, .daily-tasks-container {
-            max-width: 400px;
+        .form-container {
+            max-width: 300px;
             margin: 20px auto;
-            background-color: #333030;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -36,7 +41,7 @@
             border-radius: 4px;
         }
 
-        .login-button, .task-button {
+        .form-button {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -48,13 +53,30 @@
             margin-top: 10px;
         }
 
-        .login-button:hover, .task-button:hover {
+        .form-button:hover {
             background-color: #0056b3;
+        }
+
+        .switch-form {
+            font-size: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #ffc107;
         }
 
         #balance-container {
             margin: 20px;
             font-size: 18px;
+            color: #fff;
+        }
+
+        .daily-tasks-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
         }
 
         .daily-tasks-container .task {
@@ -67,25 +89,42 @@
             align-items: center;
         }
 
-        .daily-tasks-container .task-button {
+        .task-button {
             padding: 5px 10px;
             font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <!-- Login Section -->
-    <div class="login-container" id="login-container">
-        <h2>Login</h2>
+    <!-- Login and Signup Forms -->
+    <div class="form-container" id="loginFormContainer">
+        <h2 id="formTitle">Login</h2>
         <form id="loginForm">
             <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="text" id="loginUsername" name="username" placeholder="Username" required>
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
             </div>
-            <button type="submit" class="login-button">Login</button>
+            <button type="submit" class="form-button">Login</button>
         </form>
+        <form id="signupForm" style="display: none;">
+            <div class="form-group">
+                <input type="text" id="signupName" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="signupUsername" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="form-button">Create Account</button>
+        </form>
+        <p class="switch-form" id="switchToSignup">Don't have an account? Create one</p>
+        <p class="switch-form" id="switchToLogin" style="display: none;">Already have an account? Login</p>
     </div>
 
     <!-- Balance Display -->
@@ -94,7 +133,7 @@
     </div>
 
     <!-- Daily Tasks -->
-    <div class="daily-tasks-container" id="dailyTasks" style="display: none;">
+    <div class="daily-tasks-container" id="dailyTasks">
         <h2>Daily Tasks</h2>
         <div class="task">
             <span>Task 1: Complete Daily Login</span>
@@ -104,43 +143,70 @@
             <span>Task 2: Claim Your Reward</span>
             <button class="task-button" onclick="completeTask(200, 'dailyTask2')">Complete</button>
         </div>
-        <button class="task-button" onclick="redirectToTaskPage()">Go to Task Page</button>
+        <button class="form-button" onclick="redirectToTaskPage()">Go to Task Page</button>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // Track balance and completed tasks
         const balance = localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 0;
         const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-        // Update balance on page load
         document.getElementById("balance").textContent = balance;
 
-        // Login handler
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+        // Toggle between login and signup forms
+        const loginForm = document.getElementById("loginForm");
+        const signupForm = document.getElementById("signupForm");
+        const formTitle = document.getElementById("formTitle");
+        const switchToSignup = document.getElementById("switchToSignup");
+        const switchToLogin = document.getElementById("switchToLogin");
 
-            // Simulate login
+        switchToSignup.addEventListener("click", () => {
+            loginForm.style.display = "none";
+            signupForm.style.display = "block";
+            switchToSignup.style.display = "none";
+            switchToLogin.style.display = "block";
+            formTitle.textContent = "Create Account";
+        });
+
+        switchToLogin.addEventListener("click", () => {
+            loginForm.style.display = "block";
+            signupForm.style.display = "none";
+            switchToSignup.style.display = "block";
+            switchToLogin.style.display = "none";
+            formTitle.textContent = "Login";
+        });
+
+        // Login handler
+        loginForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const username = document.getElementById("loginUsername").value;
             localStorage.setItem("loggedInUser", JSON.stringify({ username }));
             alert("Login successful!");
-
-            // Show daily tasks and hide login form
-            document.getElementById("login-container").style.display = "none";
+            document.getElementById("loginFormContainer").style.display = "none";
             document.getElementById("dailyTasks").style.display = "block";
+        });
+
+        // Signup handler
+        signupForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const name = document.getElementById("signupName").value;
+            const email = document.getElementById("signupEmail").value;
+            const username = document.getElementById("signupUsername").value;
+            const password = document.getElementById("signupPassword").value;
+
+            localStorage.setItem("registeredUser", JSON.stringify({ name, email, username, password }));
+            alert("Account created successfully! Please login.");
+            switchToLogin.click();
         });
 
         // Complete task function
         function completeTask(points, taskId) {
             if (!completedTasks.includes(taskId)) {
-                // Add points to balance
                 const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
                 const newBalance = currentBalance + points;
                 localStorage.setItem("balance", newBalance);
                 document.getElementById("balance").textContent = newBalance;
 
-                // Mark task as completed
                 completedTasks.push(taskId);
                 localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
                 alert(`Task completed! You earned ${points} coins.`);
@@ -151,7 +217,7 @@
 
         // Redirect to task page
         function redirectToTaskPage() {
-            window.location.href = "task.html"; // Replace with your task page URL
+            window.location.href = "task.html";
         }
     </script>
 </body>
