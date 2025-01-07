@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Tasks with Login and Signup</title>
+    <title>Tasks with Account Creation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
@@ -16,8 +16,8 @@
             color: #fff;
         }
 
-        .form-container {
-            max-width: 300px;
+        .task-container {
+            max-width: 400px;
             margin: 20px auto;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
@@ -25,8 +25,28 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .form-container h2 {
-            margin-bottom: 20px;
+        .task-container .task {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #444;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-container .task-button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
         }
 
         .form-group {
@@ -56,59 +76,26 @@
         .form-button:hover {
             background-color: #0056b3;
         }
-
-        .switch-form {
-            font-size: 14px;
-            margin-top: 10px;
-            cursor: pointer;
-            color: #ffc107;
-        }
-
-        #balance-container {
-            margin: 20px;
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .daily-tasks-container {
-            max-width: 400px;
-            margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 12px;
-            display: none;
-        }
-
-        .daily-tasks-container .task {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #444;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .task-button {
-            padding: 5px 10px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
-    <!-- Login and Signup Forms -->
-    <div class="form-container" id="loginFormContainer">
-        <h2 id="formTitle">Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <input type="text" id="loginUsername" name="username" placeholder="Username" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
-            </div>
-            <button type="submit" class="form-button">Login</button>
-        </form>
-        <form id="signupForm" style="display: none;">
+    <!-- Task Section -->
+    <div class="task-container">
+        <h2>Homepage Tasks</h2>
+        <div class="task">
+            <span>Task 1: Visit the website</span>
+            <button class="task-button" onclick="completeTask(100, 'task1')">Complete</button>
+        </div>
+        <div class="task">
+            <span>Task 2: Create an account</span>
+            <button class="task-button" onclick="showAccountCreation()">Create Account</button>
+        </div>
+    </div>
+
+    <!-- Account Creation Form -->
+    <div class="form-container" id="accountForm">
+        <h2>Create Account</h2>
+        <form id="signupForm">
             <div class="form-group">
                 <input type="text" id="signupName" name="name" placeholder="Name" required>
             </div>
@@ -123,27 +110,11 @@
             </div>
             <button type="submit" class="form-button">Create Account</button>
         </form>
-        <p class="switch-form" id="switchToSignup">Don't have an account? Create one</p>
-        <p class="switch-form" id="switchToLogin" style="display: none;">Already have an account? Login</p>
     </div>
 
     <!-- Balance Display -->
     <div id="balance-container">
         <h2>Balance: <span id="balance">0</span> ☯ Self Molded Coin</h2>
-    </div>
-
-    <!-- Daily Tasks -->
-    <div class="daily-tasks-container" id="dailyTasks">
-        <h2>Daily Tasks</h2>
-        <div class="task">
-            <span>Task 1: Complete Daily Login</span>
-            <button class="task-button" onclick="completeTask(100, 'dailyTask1')">Complete</button>
-        </div>
-        <div class="task">
-            <span>Task 2: Claim Your Reward</span>
-            <button class="task-button" onclick="completeTask(200, 'dailyTask2')">Complete</button>
-        </div>
-        <button class="form-button" onclick="redirectToTaskPage()">Go to Task Page</button>
     </div>
 
     <!-- JavaScript -->
@@ -153,51 +124,10 @@
 
         document.getElementById("balance").textContent = balance;
 
-        // Toggle between login and signup forms
-        const loginForm = document.getElementById("loginForm");
-        const signupForm = document.getElementById("signupForm");
-        const formTitle = document.getElementById("formTitle");
-        const switchToSignup = document.getElementById("switchToSignup");
-        const switchToLogin = document.getElementById("switchToLogin");
-
-        switchToSignup.addEventListener("click", () => {
-            loginForm.style.display = "none";
-            signupForm.style.display = "block";
-            switchToSignup.style.display = "none";
-            switchToLogin.style.display = "block";
-            formTitle.textContent = "Create Account";
-        });
-
-        switchToLogin.addEventListener("click", () => {
-            loginForm.style.display = "block";
-            signupForm.style.display = "none";
-            switchToSignup.style.display = "block";
-            switchToLogin.style.display = "none";
-            formTitle.textContent = "Login";
-        });
-
-        // Login handler
-        loginForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const username = document.getElementById("loginUsername").value;
-            localStorage.setItem("loggedInUser", JSON.stringify({ username }));
-            alert("Login successful!");
-            document.getElementById("loginFormContainer").style.display = "none";
-            document.getElementById("dailyTasks").style.display = "block";
-        });
-
-        // Signup handler
-        signupForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const name = document.getElementById("signupName").value;
-            const email = document.getElementById("signupEmail").value;
-            const username = document.getElementById("signupUsername").value;
-            const password = document.getElementById("signupPassword").value;
-
-            localStorage.setItem("registeredUser", JSON.stringify({ name, email, username, password }));
-            alert("Account created successfully! Please login.");
-            switchToLogin.click();
-        });
+        // Show account creation form
+        function showAccountCreation() {
+            document.getElementById("accountForm").style.display = "block";
+        }
 
         // Complete task function
         function completeTask(points, taskId) {
@@ -215,10 +145,21 @@
             }
         }
 
-        // Redirect to task page
-        function redirectToTaskPage() {
-            window.location.href = "task.html";
-        }
+        // Signup handler
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const name = document.getElementById("signupName").value;
+            const email = document.getElementById("signupEmail").value;
+            const username = document.getElementById("signupUsername").value;
+            const password = document.getElementById("signupPassword").value;
+
+            localStorage.setItem("registeredUser", JSON.stringify({ name, email, username, password }));
+            alert("Account created successfully! Task completed!");
+            
+            // Hide form and complete the task
+            document.getElementById("accountForm").style.display = "none";
+            completeTask(200, "task2");
+        });
     </script>
 </body>
 </html>
