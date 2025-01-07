@@ -4,15 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TON Wallet Connection</title>
-    <link rel="stylesheet" href="material/css/w.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .open-button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        .wallet-options {
+            margin-top: 20px;
+        }
+
+        .wallet-btn, .cancel-btn {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .wallet-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .wallet-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- Open Wallet Pop-up Button -->
     <button id="openModalBtn" class="open-button">Connect TON Wallet</button>
-   
-  
+
     <!-- Modal Window -->
     <div id="walletModal" class="modal">
         <div class="modal-content">
@@ -29,6 +119,45 @@
         </div>
     </div>
 
-    <script src="material/js/w.js"></script>
+    <script>
+        // JavaScript for Modal Functionality
+        const openModalBtn = document.getElementById('openModalBtn');
+        const walletModal = document.getElementById('walletModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const connectWalletBtn = document.getElementById('connectWallet');
+        const cancelWalletBtn = document.getElementById('cancelWallet');
+        const statusMessage = document.getElementById('statusMessage');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            walletModal.style.display = 'block';
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            walletModal.style.display = 'none';
+        });
+
+        cancelWalletBtn.addEventListener('click', () => {
+            walletModal.style.display = 'none';
+        });
+
+        // Connect Wallet (Placeholder logic)
+        connectWalletBtn.addEventListener('click', () => {
+            statusMessage.innerText = 'Connecting to TON Wallet...';
+            // Simulate a connection (replace with actual TON Wallet API logic)
+            setTimeout(() => {
+                statusMessage.innerText = 'Wallet Connected Successfully!';
+                walletModal.style.display = 'none';
+            }, 2000); // Simulate a 2-second connection delay
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === walletModal) {
+                walletModal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
