@@ -24,7 +24,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #FFD700; /* Golden color */
+            color: #FFD700;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -85,7 +85,6 @@
             background-color: #1e7e34;
         }
 
-        /* Bottom navigation bar */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -127,15 +126,15 @@
     <h1>Invite Your Friends</h1>
     <div class="frens-invite">
         <div class="highlight">
-            Earn 500 Points for Every Invite!
-            <img src="https://via.placeholder.com/24" alt=" Logo">
+            Earn 500 Beans for Every Invite!
+            <img src="https://via.placeholder.com/24" alt="Logo">
         </div>
         <div class="frens-invite-button">
             <input type="text" id="link" readonly>
             <button id="copyButton">Copy Link</button>
         </div>
         <p id="inviteInfo" style="margin-top: 10px; font-size: 14px; color: #FFD700;">
-            Invite friends and earn 500 points for each successful invite! If your friends join using your link, they will also earn 500 points.
+            Invite friends and earn 500 beans for each successful invite! If your friends join using your link, they will also earn 500 beans.
         </p>
         <a id="telegramInviteButton" class="invite-button">Invite on Telegram</a>
     </div>
@@ -164,38 +163,37 @@
     </nav>
 
     <script>
-        // Mock backend response (replace this with your server's API call)
+        // Generate Referral Link
         const getReferralLink = () => {
             const userID = "userID123"; // Replace with actual user ID
             return `https://yourwebsite.com/invite-friends.html?ref=${userID}`;
         };
 
-        // Set the referral link and description
         const referralLink = getReferralLink();
-        const referralDescription = `Hey! Join Self Molded Bot and earn rewards with me. Both of us will get 500 points! Here's my referral link: ${referralLink}`;
         document.getElementById("link").value = referralLink;
 
-        // Copy link and description to clipboard
+        // Copy Referral Link to Clipboard
         document.getElementById("copyButton").addEventListener("click", function () {
             navigator.clipboard.writeText(referralLink)
                 .then(() => alert("Referral link copied to clipboard!"))
                 .catch(err => console.error("Failed to copy link:", err));
         });
 
-        // Add functionality to the Telegram Invite button
+        // Set Telegram Invite Button
+        const referralDescription = `Join Self Molded Bot and earn 500 beans with me! Use my referral link: ${referralLink}`;
         document.getElementById("telegramInviteButton").href = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralDescription)}`;
 
-        // Check for referral query parameter
+        // Handle Referral Query Parameter
         const urlParams = new URLSearchParams(window.location.search);
         const referrer = urlParams.get("ref");
         if (referrer) {
-            // Add 500 points to the invitee's balance (simulate with localStorage)
-            let balance = parseInt(localStorage.getItem("balance") || "0");
-            balance += 500;
-            localStorage.setItem("balance", balance);
+            // Add 500 beans to invitee's balance
+            let beans = parseInt(localStorage.getItem("beans") || "0");
+            beans += 500;
+            localStorage.setItem("beans", beans);
 
-            // Log the referrer (in a real app, send this to the backend)
-            console.log(`Referred by: ${referrer}`);
+            // Simulate adding 500 beans to the referrer's balance (for testing)
+            console.log(`Referred by: ${referrer}. 500 beans added to both balances.`);
         }
     </script>
 </body>
