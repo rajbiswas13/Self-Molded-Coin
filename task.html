@@ -6,7 +6,6 @@
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CSS Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -133,20 +132,14 @@
     </style>
 </head>
 <body>
-    <!-- HTML Content -->
     <div id="balance-container">
         <h2><b>_____________</b></h2>
         <h2><b> TASKS </b></h2>
         <span id="beans">0</span> Beans
-        <br>
-        <span id="diamonds">0</span> Diamonds
-        <br>
-        <span id="coins">0</span> Self-Molded Coins
         <h2><b>_______________</b></h2>
     </div>
 
     <section class="tasks scrollable" id="tasks">
-        <!-- Task 1 -->
         <div class="task-container" id="task1">
             <div class="task">
                 <div class="task-detail">
@@ -157,14 +150,13 @@
                         <h4>Subscribe</h4>
                         <div class="task-data">
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100000</h5>
+                            <h5>100</h5>
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 1000000, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
+                <button class="task-button" onclick="completeTask(this, 100, 'task1')">☯ claim</button>
             </div>
         </div>
-        <!-- Task 2 -->
         <div class="task-container" id="task2">
             <div class="task">
                 <div class="task-detail">
@@ -175,11 +167,11 @@
                         <h4>Watch Video</h4>
                         <div class="task-data">
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>200000</h5>
+                            <h5>200</h5>
                         </div>
                     </div>
                 </div>
-                <button class="task-button" onclick="verifyTask(this, 200000, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
+                <button class="task-button" onclick="completeTask(this, 200, 'task2')">☯ claim</button>
             </div>
         </div>
     </section>
@@ -208,48 +200,34 @@
     </nav>
 
     <script>
-        // Variables for balances
+        const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
         let beans = parseInt(localStorage.getItem("beans")) || 0;
-        let diamonds = parseInt(localStorage.getItem("diamonds")) || 0;
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
 
-        // Update balances on page load
         function updateBalances() {
-            // Calculate conversions
-            diamonds = Math.floor(beans / 10000);
-            coins = Math.floor(diamonds / 1000);
-
-            // Update UI
             document.getElementById("beans").textContent = beans;
-            document.getElementById("diamonds").textContent = diamonds;
-            document.getElementById("coins").textContent = coins;
-
-            // Save to localStorage
             localStorage.setItem("beans", beans);
-            localStorage.setItem("diamonds", diamonds);
-            localStorage.setItem("coins", coins);
         }
 
-        // Verify and complete a task
-        function verifyTask(button, reward, url, taskId) {
-            if (button.textContent.trim() === "☯ claim") {
-                button.textContent = "Verify";
-                button.style.backgroundColor = "#ffc107";
-                window.open(url, "_blank");
-            } else if (button.textContent.trim() === "Verify") {
-                window.open(url, "_blank");
+        function completeTask(button, reward, taskId) {
+            if (completedTasks.includes(taskId)) return;
 
-                beans += reward; // Add reward as beans
-                updateBalances(); // Update balances
+            beans += reward;
+            updateBalances();
 
-                // Remove task
+            completedTasks.push(taskId);
+            localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+            const task = document.getElementById(taskId);
+            if (task) task.remove();
+        }
+
+        window.onload = function () {
+            updateBalances();
+            completedTasks.forEach(taskId => {
                 const task = document.getElementById(taskId);
                 if (task) task.remove();
-            }
-        }
-
-        // Initialize balances on page load
-        window.onload = updateBalances;
+            });
+        };
     </script>
 </body>
 </html>
