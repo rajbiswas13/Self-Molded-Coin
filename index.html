@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading...</title>
     <style>
-      
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden; 
+            overflow: hidden;
         }
-        
-        
+
         .loading-container {
             display: flex;
             justify-content: center;
@@ -26,12 +24,12 @@
             text-align: center;
             font-family: Arial, sans-serif;
         }
-        
+
         .loading-container h1 {
             font-size: 24px;
             margin: 0;
         }
-        
+
         .spinner {
             border: 8px solid rgba(255, 255, 255, 0.1);
             border-left: 8px solid #d5d7dd; 
@@ -41,7 +39,7 @@
             animation: spin 1s linear infinite;
             margin-top: 20px;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -57,9 +55,9 @@
     </div>
 
     <script>
-       
+        // Redirect to leaderboard.html after 5 seconds
         setTimeout(function() {
-            window.location.href = 'home.html'; 
+            window.location.href = 'leaderboard.html'; // Change from home.html to leaderboard.html
         }, 5000);
     </script>
 </body>
