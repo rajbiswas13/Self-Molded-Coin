@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* General Page Styles */
         body {
@@ -59,36 +60,37 @@
             color: #ffcc00;
         }
 
-        /* New Bottom Navigation Styles */
-        .bottom-menu {
+        /* Bottom Navigation Styles */
+        nav.bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #000; /* Black background */
-            color: #fff; /* White text */
+            background-color: #222;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: 1px solid #444;
-            z-index: 1000;
-        }
-
-        .bottom-menu a {
-            text-decoration: none;
-            color: #fff;
-            text-align: center;
-            font-size: 12px;
-            flex: 1;
             padding: 10px 0;
+            border-top: 1px solid #444;
         }
 
-        .bottom-menu a i {
+        nav.bottom-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        nav.bottom-nav a i {
             display: block;
             font-size: 20px;
             margin-bottom: 5px;
         }
 
-        .bottom-menu a.active {
+        nav.bottom-nav a span {
+            font-size: 12px;
+        }
+
+        nav.bottom-nav a.active {
             color: #fdd835; /* Highlighted yellow for the active menu */
         }
     </style>
@@ -102,29 +104,29 @@
         <p>Loading leaderboard...</p> <!-- Placeholder for loading -->
     </div>
 
-    <!-- New Bottom Navigation -->
-    <div class="bottom-menu">
-        <a href="home.html">
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
             <span>HOME</span>
         </a>
-        <a href="leaderboard.html" class="active">
+        <a href="leaderboard.html" class="nav-item active">
             <i class="fas fa-trophy"></i>
             <span>LEADERBOARD</span>
         </a>
-        <a href="invite-friends.html">
+        <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
             <span>FRIENDS</span>
         </a>
-        <a href="task.html">
+        <a href="task.html" class="nav-item">
             <i class="fas fa-tasks"></i>
             <span>TASKS</span>
         </a>
-        <a href="balance.html">
+        <a href="balance.html" class="nav-item">
             <i class="fas fa-wallet"></i>
             <span>BALANCE</span>
         </a>
-    </div>
+    </nav>
 
     <script>
         // Function to Fetch Leaderboard Data
