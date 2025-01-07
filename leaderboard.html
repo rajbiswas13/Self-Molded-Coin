@@ -59,43 +59,37 @@
             color: #ffcc00;
         }
 
-        /* Bottom Navigation Styles */
-        nav.bottom-nav {
+        /* New Bottom Navigation Styles */
+        .bottom-menu {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #222;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            align-items: center;
             border-top: 1px solid #444;
-            z-index: 1000; /* Ensure it stays above other elements */
+            z-index: 1000;
         }
 
-        nav.bottom-nav a {
-            color: #fff;
+        .bottom-menu a {
             text-decoration: none;
-            font-size: 14px;
+            color: #fff;
             text-align: center;
+            font-size: 12px;
             flex: 1;
+            padding: 10px 0;
         }
 
-        nav.bottom-nav a i {
+        .bottom-menu a i {
             display: block;
             font-size: 20px;
             margin-bottom: 5px;
         }
 
-        nav.bottom-nav a span {
-            font-size: 12px;
-            color: #ddd;
-        }
-
-        /* Error Message Styles */
-        .error-message {
-            color: #ff4d4d;
-            font-size: 16px;
-            margin-top: 20px;
+        .bottom-menu a.active {
+            color: #fdd835; /* Highlighted yellow for the active menu */
         }
     </style>
 </head>
@@ -108,29 +102,29 @@
         <p>Loading leaderboard...</p> <!-- Placeholder for loading -->
     </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
+    <!-- New Bottom Navigation -->
+    <div class="bottom-menu">
+        <a href="home.html">
             <i class="fas fa-home"></i>
             <span>HOME</span>
         </a>
-        <a href="leaderboard.html" class="nav-item">
+        <a href="leaderboard.html" class="active">
             <i class="fas fa-trophy"></i>
             <span>LEADERBOARD</span>
         </a>
-        <a href="invite-friends.html" class="nav-item">
+        <a href="invite-friends.html">
             <i class="fas fa-user-friends"></i>
             <span>FRIENDS</span>
         </a>
-        <a href="task.html" class="nav-item">
+        <a href="task.html">
             <i class="fas fa-tasks"></i>
             <span>TASKS</span>
         </a>
-        <a href="balance.html" class="nav-item">
+        <a href="balance.html">
             <i class="fas fa-wallet"></i>
             <span>BALANCE</span>
         </a>
-    </nav>
+    </div>
 
     <script>
         // Function to Fetch Leaderboard Data
