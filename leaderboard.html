@@ -23,13 +23,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .leaderboard-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-decoration: underline;
-            color: #ffcc00;
-        }
-
         .leaderboard-item {
             display: flex;
             align-items: center;
@@ -66,7 +59,6 @@
     </div>
 
     <script>
-        // Fetch and render the leaderboard from leaderboard.json
         async function fetchLeaderboard() {
             try {
                 const response = await fetch('leaderboard.json'); // URL of the JSON file
