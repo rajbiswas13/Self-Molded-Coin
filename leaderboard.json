@@ -1,14 +1,55 @@
-[
-    {
-        "id": 1,
-        "name": "John Doe",
-        "dp_url": "https://via.placeholder.com/40", // Replace with actual DP URL
-        "points": 5000
-    },
-    {
-        "id": 2,
-        "name": "Jane Smith",
-        "dp_url": "https://via.placeholder.com/40", // Replace with actual DP URL
-        "points": 4500
+const fs = require('fs');
+const axios = require('axios');
+
+// Replace with your bot token
+const BOT_TOKEN = "your_bot_token";
+
+// Example user data to fetch
+const users = [
+    { id: 123456789, points: 7000 },
+    { id: 987654321, points: 6500 },
+    { id: 246810121, points: 6200 }
+];
+
+// Fetch user details from Telegram
+async function fetchUserDetails(user) {
+    try {
+        const chatResponse = await axios.get(
+            `https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${user.id}`
+        );
+        const chat = chatResponse.data.result;
+
+        const photoResponse = await axios.get(
+            `https://api.telegram.org/bot${BOT_TOKEN}/getUserProfilePhotos?user_id=${user.id}`
+        );
+
+        const photoUrl =
+            photoResponse.data.result.photos[0]?.[0]?.file_id
+                ? `https://api.telegram.org/file/bot${BOT_TOKEN}/${photoResponse.data.result.photos[0][0].file_id}`
+                : null;
+
+        return {
+            id: user.id,
+            name: chat.username || `${chat.first_name} ${chat.last_name}`,
+            dp_url: photoUrl || "https://via.placeholder.com/40",
+            points: user.points
+        };
+    } catch (error) {
+        console.error(`Error fetching data for user ${user.id}:`, error);
+        return null;
     }
-]
+}
+
+// Update leaderboard.json
+async function updateLeaderboard() {
+    const leaderboard = [];
+    for (const user of users) {
+        const userDetails = await fetchUserDetails(user);
+        if (userDetails) leaderboard.push(userDetails);
+    }
+
+    fs.writeFileSync("leaderboard.json", JSON.stringify(leaderboard, null, 4));
+    console.log("Leaderboard updated!");
+}
+
+updateLeaderboard();
