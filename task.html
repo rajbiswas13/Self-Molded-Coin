@@ -1,233 +1,543 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Complete Tasks</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
+
+        /* CSS Styling */
+
         body {
+
             font-family: Arial, sans-serif;
+
             text-align: center;
+
             background-color: #000;
+
             color: #fff;
+
             margin: 0;
+
             padding: 0;
+
         }
+
+
 
         #balance-container {
+
             margin: 20px;
+
             font-size: 18px;
+
         }
+
+
 
         .task-container {
+
             margin: 10px auto;
+
             max-width: 600px;
+
         }
+
+
 
         .task {
+
             margin: 10px auto;
+
             padding: 20px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             border: 1px solid #000000;
+
             border-radius: 12px;
+
             background-color: #333030;
+
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
             transition: transform 0.3s ease;
+
             width: 80%;
+
         }
+
+
 
         .task:hover {
+
             transform: translateY(-5px);
+
         }
+
+
 
         .task-detail {
+
             display: flex;
+
             align-items: center;
+
         }
+
+
 
         .task-image img {
+
             border-radius: 8px;
+
             margin-right: 10px;
+
         }
+
+
 
         .task h4 {
+
             margin: 0;
+
             font-size: 18px;
+
             color: #f2f2f2;
+
         }
+
+
 
         .task-data {
+
             display: flex;
+
             align-items: center;
+
             margin-top: 8px;
+
         }
+
+
 
         .task-data img {
+
             margin-right: 5px;
+
         }
+
+
 
         .task-data h5 {
+
             margin: 0;
+
             color: #ffcc00;
+
             font-size: 18px;
+
         }
+
+
 
         .task-button {
+
             background-color: #ffffff;
+
             color: rgb(0, 0, 0);
+
             border: none;
+
             padding: 10px 20px;
+
             font-size: 16px;
+
             cursor: pointer;
+
             border-radius: 8px;
+
             transition: background-color 0.3s ease;
+
         }
+
+
 
         .task-button:hover {
+
             background-color: #a2aaa0;
+
         }
+
+
+
+        .tasks.scrollable {
+
+            max-height: 590px;
+
+            overflow-y: auto;
+
+            margin: 20px auto;
+
+            width: 90%;
+
+            padding-right: 10px;
+
+            border: 1px solid #000000;
+
+        }
+
+
 
         nav.bottom-nav {
+
             display: flex;
+
             justify-content: space-around;
+
             align-items: center;
+
             background-color: #222;
+
             padding: 10px 0;
+
             position: fixed;
+
             bottom: 0;
+
             width: 100%;
+
             border-top: 1px solid #444;
+
         }
+
+
 
         nav.bottom-nav a {
+
             color: #fff;
+
             text-decoration: none;
+
             font-size: 14px;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
         }
+
+
 
         nav.bottom-nav a i {
+
             font-size: 20px;
+
         }
+
+
 
         @media (max-width: 600px) {
+
             .task-container {
+
                 max-width: 100%;
+
             }
+
+
 
             .task-button {
+
                 padding: 10px 15px;
+
                 font-size: 14px;
+
             }
+
+
 
             .task h4 {
+
                 font-size: 16px;
+
             }
+
         }
+
     </style>
+
 </head>
+
 <body>
+
+    <!-- HTML Content -->
+
     <div id="balance-container">
+
         <h2><b>_____________</b></h2>
+
         <h2><b> TASKS </b></h2>
-        <span id="beans">0</span> Beans
-        <h2><b>_______________</b></h2>
+
+        <span id="balance">0</span> ☯ total Self Molded Coin
+
     </div>
 
+    <h2><b>_______________</b></h2>
+
+
+
     <section class="tasks scrollable" id="tasks">
+
+        <!-- Task 1 -->
+
         <div class="task-container" id="task1">
+
             <div class="task">
+
                 <div class="task-detail">
+
                     <div class="task-image">
+
                         <img src="material/images/you.gif" width="45px" alt="">
+
                     </div>
+
                     <div>
+
                         <h4>Subscribe</h4>
+
                         <div class="task-data">
+
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>100000</h5>
+
+                            <h5>100</h5>
+
                         </div>
+
                     </div>
+
                 </div>
-                <button class="task-button" onclick="completeTask(this, 1000000,'https://oncehelp.com/axRh', 'task1')">☯ claim</button>
+
+                <button class="task-button" onclick="verifyTask(this, 100, 'https://youtube.com/@tho7142?sub_confirmation=1', 'task1')">☯ claim</button>
+
             </div>
+
         </div>
+
+        <!-- Task 2 -->
+
         <div class="task-container" id="task2">
+
             <div class="task">
+
                 <div class="task-detail">
+
                     <div class="task-image">
+
                         <img src="material/images/you.gif" width="45px" alt="">
+
                     </div>
+
                     <div>
+
                         <h4>Watch Video</h4>
+
                         <div class="task-data">
+
                             <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                            <h5>2000000</h5>
+
+                            <h5>200</h5>
+
                         </div>
+
                     </div>
+
                 </div>
-                <button class="task-button" onclick="completeTask(this, 2000000, 'task2')">☯ claim</button>
+
+                <button class="task-button" onclick="verifyTask(this, 200, 'https://youtube.com/watch?v=dQw4w9WgXcQ', 'task2')">☯ claim</button>
+
             </div>
+
         </div>
+
     </section>
 
+
+
     <nav class="bottom-nav">
+
         <a href="home.html" class="nav-item">
+
             <i class="fas fa-home"></i>
+
             <span>HOME</span>
+
         </a>
+
         <a href="leaderboard.html" class="nav-item">
+
             <i class="fas fa-trophy"></i>
+
             <span>LEADERBOARD</span>
+
         </a>
+
         <a href="invite-friends.html" class="nav-item">
+
             <i class="fas fa-user-friends"></i>
+
             <span>FRIENDS</span>
+
         </a>
+
         <a href="task.html" class="nav-item">
+
             <i class="fas fa-tasks"></i>
+
             <span>TASKS</span>
+
         </a>
+
         <a href="balance.html" class="nav-item">
+
             <i class="fas fa-wallet"></i>
+
             <span>BALANCE</span>
+
         </a>
+
     </nav>
 
+
+
     <script>
+
+        // Track completed tasks in localStorage
+
         const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
-        let beans = parseInt(localStorage.getItem("beans")) || 0;
 
-        function updateBalances() {
-            document.getElementById("beans").textContent = beans;
-            localStorage.setItem("beans", beans);
+
+
+        // Check if a task is completed
+
+        function isTaskCompleted(taskId) {
+
+            return completedTasks.includes(taskId);
+
         }
 
-        function completeTask(button, reward, taskId) {
-            if (completedTasks.includes(taskId)) return;
 
-            beans += reward;
-            updateBalances();
 
-            completedTasks.push(taskId);
-            localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        // Mark a task as completed
 
-            const task = document.getElementById(taskId);
-            if (task) task.remove();
+        function markTaskCompleted(taskId) {
+
+            if (!isTaskCompleted(taskId)) {
+
+                completedTasks.push(taskId);
+
+                localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+            }
+
         }
+
+
+
+        // Verify and complete a task
+
+        function verifyTask(button, reward, url, taskId) {
+
+            if (button.textContent.trim() === "☯ claim") {
+
+                button.textContent = "Verify";
+
+                button.style.backgroundColor = "#ffc107";
+
+                window.open(url, "_blank");
+
+            } else if (button.textContent.trim() === "Verify") {
+
+                window.open(url, "_blank");
+
+
+
+                let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+
+                currentBalance += reward;
+
+                localStorage.setItem("balance", currentBalance);
+
+
+
+                document.getElementById("balance").textContent = currentBalance;
+
+
+
+                // Mark the task as completed
+
+                markTaskCompleted(taskId);
+
+
+
+                // Remove the task from the page
+
+                const task = document.getElementById(taskId);
+
+                if (task) {
+
+                    task.remove();
+
+                }
+
+            }
+
+        }
+
+
+
+        // Display balance and hide completed tasks on page load
 
         window.onload = function () {
-            updateBalances();
+
+            const currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+
+            document.getElementById("balance").textContent = currentBalance;
+
+
+
             completedTasks.forEach(taskId => {
+
                 const task = document.getElementById(taskId);
-                if (task) task.remove();
+
+                if (task) {
+
+                    task.remove();
+
+                }
+
             });
+
         };
+
     </script>
+
 </body>
-</html>
+
+    </html>
